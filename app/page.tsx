@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 type Data = {
   userId: number;
@@ -20,12 +21,19 @@ export default async function Home() {
 
   return (
     <div>
+      <p>{session?.user?.email}</p>
       {session ? (
         data.map((item) => {
-          return <div key={item.id}>{item.title}</div>;
+          return (
+            <>
+              <div key={item.id}>{item.title}</div>
+            </>
+          );
         })
       ) : (
-        <Link href="/api/auth/signin">signup</Link>
+        <>
+          <Link href="/api/auth/signin">signup</Link>
+        </>
       )}
     </div>
   );
