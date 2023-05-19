@@ -2,6 +2,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Link from "next/link";
 import SignOutButton from "./components/buttons";
+import { prisma } from "@/lib/prisma";
+
+import AlertDiailog from "./components/AlertDiailog";
+import Modal from "./components/Modal";
+import clsx from "clsx";
 
 type Data = {
   userId: number;
@@ -16,27 +21,26 @@ async function fetchStuff(): Promise<Data[]> {
 }
 
 export default async function Home() {
-  const data = await fetchStuff();
+  const userData = await prisma.user?.findMany();
+
   const session = await getServerSession(authOptions);
 
   return (
     <div>
-      <div className="flex">
-        <p>{session?.user?.email}</p>
-        {session && <SignOutButton />}
-      </div>
       {session ? (
-        data.map((item) => {
-          return (
+        <div>
+          {userData.map((user) => (
             <>
-              <div key={item.id}>{item.title}</div>
+              <p key={user.id}>{user.name}</p>
+              <AlertDiailog name={user.name!} />
             </>
-          );
-        })
+          ))}
+        </div>
       ) : (
-        <>
-          <Link href="/api/auth/signin">signup</Link>
-        </>
+        <div className={clsx("flex justify-between, items-center")}>
+          <Link href="/login">Login</Link>
+          <Link href="/api/auth/signin">Sign in</Link>
+        </div>
       )}
     </div>
   );

@@ -11,13 +11,18 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  login,
 }: {
   children: React.ReactNode;
+  login: React.ReactNode;
 }) {
   return (
     <AuthProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          {children}
+          {login}
+        </body>
       </html>
     </AuthProvider>
   );
