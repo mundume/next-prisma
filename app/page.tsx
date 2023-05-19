@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import SignOutButton from "./components/buttons";
 
 type Data = {
   userId: number;
@@ -21,7 +21,10 @@ export default async function Home() {
 
   return (
     <div>
-      <p>{session?.user?.email}</p>
+      <div className="flex">
+        <p>{session?.user?.email}</p>
+        {session && <SignOutButton />}
+      </div>
       {session ? (
         data.map((item) => {
           return (
