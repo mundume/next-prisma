@@ -15,8 +15,6 @@ type Data = {
 };
 
 export default async function Home() {
-  const userData = await prisma.user?.findMany();
-
   const session = await getServerSession(authOptions);
   const profileData = await prisma.user.findUnique({
     where: {
@@ -29,12 +27,7 @@ export default async function Home() {
       {session ? (
         <div className="flex justify-around">
           <Link href={`/profile/${profileData?.id}`}>Hello</Link>
-          {userData.map((user) => (
-            <>
-              <p key={user.id}>{user.name}</p>
-              <AlertDiailog name={user.name!} />
-            </>
-          ))}
+          <p>{profileData?.name}</p>
         </div>
       ) : (
         <div className={clsx("flex justify-between ")}>
