@@ -35,6 +35,7 @@ export default async function Home() {
               <AlertDiailog name={user.name!} />
             </>
           ))}
+          <Link href="/login">Hello</Link>
         </div>
       ) : (
         <div className={clsx("flex justify-between, items-center")}>
