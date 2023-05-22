@@ -1,10 +1,19 @@
+import UserCard from "@/app/components/UserCard";
+
 import { prisma } from "@/lib/prisma";
+import { Metadata } from "next";
+import Link from "next/link";
 
 type Props = {
   params: {
     id: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const user = await prisma.user.findUnique({ where: { id: params.id } });
+  return { title: `User profile of ${user?.name}` };
+}
 
 export default async function page({ params }: Props) {
   const userData = await prisma.user.findUnique({
@@ -15,9 +24,11 @@ export default async function page({ params }: Props) {
 
   return (
     <div className="grid gap-1 p-2">
-      <img src={userData?.image!} alt={userData?.name!} />
-      <small className="font-bold">{userData?.email!}</small>
-      <p className="font-semibold text-purple-600">{userData?.name}</p>
+      {/* @ts-ignore */}
+      <UserCard userData={userData} />
+      <Link href={`/`} className="w-auto font-bold text-yellow-400">
+        return home
+      </Link>
     </div>
   );
 }
