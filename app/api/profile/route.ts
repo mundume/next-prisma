@@ -10,5 +10,6 @@ export async function GET() {
       email: session?.user?.email!,
     },
   });
+
   return NextResponse.json(profileData);
 }
