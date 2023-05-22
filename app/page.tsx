@@ -5,7 +5,7 @@ import SignOutButton from "./components/buttons";
 import { prisma } from "@/lib/prisma";
 
 import AlertDiailog from "./components/AlertDiailog";
-import Modal from "./components/Modal";
+
 import clsx from "clsx";
 
 type Data = {

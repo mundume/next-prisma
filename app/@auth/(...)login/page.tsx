@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/dialog";
 import Link from "next/link";
 
-export default function Modal() {
+export default function page() {
   return (
-    <Dialog>
+    <Dialog open={true}>
       <DialogTrigger asChild>
         <Link href="/login">Login</Link>
       </DialogTrigger>
