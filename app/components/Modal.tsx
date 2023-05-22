@@ -12,10 +12,10 @@ import Link from "next/link";
 
 export default function Modal() {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Link href="/login">Login</Link>
-      </DialogTrigger>
+    <Dialog open={true}>
+      {/* <DialogTrigger asChild>
+        <Link href="/login" >Login</Link>
+      </DialogTrigger> */}
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
