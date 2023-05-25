@@ -16,7 +16,7 @@ type Data = {
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  const profileData = await prisma.user.findUnique({
+  const profileData = await prisma.user?.findUnique({
     where: {
       email: session?.user?.email!,
     },

@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import React from "react";
+import FollowButton from "./FollowButton/FollowButton";
 
 export default async function UserCard({ userData }: { userData: User }) {
   return (
@@ -9,6 +10,7 @@ export default async function UserCard({ userData }: { userData: User }) {
       <p className="font-semibold text-purple-600">{userData?.name}</p>
       <small className="font-bold">{userData?.age}</small>
       <p className="text-gray-900">{userData?.bio}</p>
+      {/* //@ts-ignore */}
     </>
   );
 }

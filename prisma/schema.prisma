@@ -3,26 +3,26 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  relationMode      = "prisma"
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.VarChar(255)
-  access_token       String?  @db.VarChar(255)
-  expires_at         Int?
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.VarChar(255)
+  access_token             String? @db.VarChar(255)
+  expires_at               Int?
   refresh_token_expires_in Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.VarChar(255)
-  session_state      String?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.VarChar(255)
+  session_state            String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -43,13 +43,27 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  bio           String? @db.VarChar(255)
+  bio           String?   @db.VarChar(255)
   age           Int?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  following     Follows[] @relation("follower")
+  followedBy    Follows[] @relation("following")
+  Post          Post[]
+}
+
+model Follows {
+  followerId  String
+  followingId String
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  following   User   @relation("following", fields: [followingId], references: [id])
+
+  @@id([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
 }
 
 model VerificationToken {
@@ -58,4 +72,18 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+//create a model for posts and update all the relationships in this schema
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
 }

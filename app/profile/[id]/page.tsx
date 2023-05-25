@@ -1,3 +1,4 @@
+import FollowButton from "@/app/components/FollowButton/FollowButton";
 import UserCard from "@/app/components/UserCard";
 
 import { prisma } from "@/lib/prisma";
@@ -26,9 +27,13 @@ export default async function page({ params }: Props) {
     <div className="grid gap-1 p-2">
       {/* @ts-ignore */}
       <UserCard userData={userData} />
+      {/* @ts-ignore */}
+      <FollowButton targetUserId={params.id} />
       <Link href={`/`} className="w-auto font-bold text-yellow-400">
         return home
       </Link>
+
+      <FollowButton targetUserId={params.id} />
     </div>
   );
 }
