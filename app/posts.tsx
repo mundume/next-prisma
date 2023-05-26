@@ -13,7 +13,6 @@ export async function Posts() {
   }
   return (
     <div>
-      <h1>Whats Happening</h1>
       {post.map((post) => (
         //@ts-ignore
         <PostCard

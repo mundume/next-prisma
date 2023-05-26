@@ -27,8 +27,13 @@ export async function PostCard({ title, content, id }: Props) {
             <img src={user?.image!} alt="null" />
           </div>
         </div>
-        <Link href={`/profile/${user?.id!}`}>{user?.name!}</Link>
+        <Link href={`/profile/${user?.id!}`} className="font-semibold ">
+          {user?.name!}
+        </Link>
       </div>
+      <Link href={`/post/${id}`} className="text-sm text-purple-600">
+        {title}
+      </Link>
     </div>
   );
 }

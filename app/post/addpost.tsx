@@ -1,6 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export default function AddPosts() {
+  const router = useRouter();
   const addPost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -15,7 +18,8 @@ export default function AddPosts() {
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
+
+    router.refresh();
   };
   return (
     <div>
