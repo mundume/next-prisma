@@ -32,8 +32,6 @@ export default async function page({ params }: Props) {
       <Link href={`/`} className="w-auto font-bold text-yellow-400">
         return home
       </Link>
-
-      <FollowButton targetUserId={params.id} />
     </div>
   );
 }

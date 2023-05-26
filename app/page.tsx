@@ -26,8 +26,9 @@ export default async function Home() {
     <div>
       {session ? (
         <div className="flex justify-around">
-          <Link href={`/profile/${profileData?.id}`}>Hello</Link>
+          <Link href={`/profile/${profileData?.id}`}>Profile</Link>
           <p>{profileData?.name}</p>
+          <Link href="/users">Users</Link>
         </div>
       ) : (
         <div className={clsx("flex justify-between ")}>

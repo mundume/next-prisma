@@ -7,7 +7,8 @@ export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email!;
   // id for the user that is to be followed from the client
-  const { targetUserid } = await req.json();
+  const { targetUserId } = await req.json();
+  console.log(targetUserId);
   //id for the current user (fetched from prismadb)
   const currentUserId = await prisma.user
     .findUnique({
@@ -20,7 +21,7 @@ export async function POST(req: Request) {
   const record = await prisma.follows.create({
     data: {
       followerId: currentUserId,
-      followingId: targetUserid,
+      followingId: targetUserId as string,
     },
   });
   return NextResponse.json(record);
@@ -30,7 +31,8 @@ export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email!;
   // id for the user that is to be unfolowed which is extracted from the URL using the NextUrl object
-  const targetUserid = req.nextUrl.searchParams.get("targetUserId");
+  const targetUserId = req.nextUrl.searchParams.get("targetUserId");
+  console.log(targetUserId);
   //grab the current user id from the database using the email of the current user and get the id through the returned promise by findUnique
   const currentUserId = await prisma.user
     .findUnique({
@@ -44,7 +46,7 @@ export async function DELETE(req: NextRequest) {
     where: {
       followerId_followingId: {
         followerId: currentUserId,
-        followingId: targetUserid!,
+        followingId: targetUserId!,
       },
     },
   });

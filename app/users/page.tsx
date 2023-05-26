@@ -3,6 +3,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import UserCard from "../components/UserCard";
+import Link from "next/link";
 
 export default async function page() {
   const session = await getServerSession(authOptions);
@@ -13,8 +14,11 @@ export default async function page() {
   return (
     <div>
       {users.map((user) => (
-        // @ts-ignore
-        <UserCard key={user.id} userData={user} />
+        <>
+          {/* @ts-ignore */}
+          <UserCard key={user.id} userData={user} />
+          <Link href={`/profile/${user.id}`}>View Profile</Link>
+        </>
       ))}
     </div>
   );
