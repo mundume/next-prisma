@@ -3,9 +3,11 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
-import AlertDiailog from "./components/AlertDiailog";
-
 import clsx from "clsx";
+import AddPosts from "./post/addpost";
+import { Posts } from "./posts";
+import Navbar from "./components/Navbar";
+import Avatar from "./components/Avatar";
 
 type Data = {
   userId: number;
@@ -16,19 +18,23 @@ type Data = {
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  const profileData = await prisma.user?.findUnique({
+  const user = await prisma.user?.findUnique({
     where: {
       email: session?.user?.email!,
     },
   });
 
   return (
-    <div>
+    <div className="p-2">
       {session ? (
-        <div className="flex justify-around">
-          <Link href={`/profile/${profileData?.id}`}>Profile</Link>
-          <p>{profileData?.name}</p>
-          <Link href="/users">Users</Link>
+        <div className="">
+          <Navbar href={`/`} />
+          <div className="flex items-center gap-1">
+            <Avatar image={user?.image!} />
+            <AddPosts />
+          </div>
+          {/* @ts-ignore */}
+          <Posts />
         </div>
       ) : (
         <div className={clsx("flex justify-between ")}>
