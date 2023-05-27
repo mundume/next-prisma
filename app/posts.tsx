@@ -19,6 +19,7 @@ export async function Posts() {
           id={post.id}
           title={post.title}
           content={post.content}
+          date={post.createdAt.toString()}
           key={post.id}
         />
       ))}

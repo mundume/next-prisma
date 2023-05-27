@@ -20,6 +20,14 @@ export default async function page({ params }: Props) {
     where: {
       id: params.id,
     },
+    include: {
+      author: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+    },
   });
   return (
     <div className="p-4">
@@ -29,9 +37,11 @@ export default async function page({ params }: Props) {
           {user?.name!}
         </Link>
       </div>
-      <small className="font-semibold text-purple-500">
-        {currentPost?.title}
-      </small>
+      <div className="mx-12 ">
+        <small className="px-1 font-semibold text-purple-500 ">
+          {currentPost?.title}
+        </small>
+      </div>
     </div>
   );
 }
