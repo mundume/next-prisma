@@ -30,15 +30,6 @@ export default async function page({ params }: Props) {
     where: {
       id: params.id,
     },
-    include: {
-      author: {
-        select: {
-          name: true,
-          image: true,
-          id: true,
-        },
-      },
-    },
   });
   return (
     <div className="p-4">
@@ -47,9 +38,9 @@ export default async function page({ params }: Props) {
         <p>Back</p>
       </Link>
       <div className="flex items-center gap-1">
-        <Avatar image={currentPost?.author?.image!} />
-        <Link href={`/profile/${currentPost?.author.id}`} className="font-bold">
-          {currentPost?.author?.name!}
+        <Avatar image={user?.image!} />
+        <Link href={`/profile/${user?.id}`} className="font-bold">
+          {user?.name!}
         </Link>
       </div>
       <div className="mx-12 ">
