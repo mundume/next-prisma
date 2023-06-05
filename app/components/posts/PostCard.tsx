@@ -12,23 +12,28 @@ type Props = {
   content?: string;
   id: string;
   date: string;
+  name: string;
+  userId: string;
+  image: string;
 };
-export async function PostCard({ title, id, date }: Props) {
+export async function PostCard({
+  title,
+  id,
+  date,
+  name,
+  userId,
+  image,
+}: Props) {
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
-  const user = await prisma.user.findUnique({
-    where: {
-      email: email!,
-    },
-  });
 
   return (
     <div className="p-4 mx-2 my-3 border rounded ">
       <div className="flex items-center justify-between gap-1 ">
         <div className="flex items-center gap-1">
-          <Avatar image={user?.image!} />
-          <Link href={`/profile/${user?.id!}`} className="font-semibold ">
-            {user?.name!}
+          <Avatar image={image!} />
+          <Link href={`/profile/${userId!}`} className="font-semibold ">
+            {name!}
           </Link>
         </div>
         <small className="flex items-center ">{relativeDate(date)}</small>

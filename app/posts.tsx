@@ -7,6 +7,9 @@ import { PostCard } from "./components/posts/PostCard";
 export async function Posts() {
   const session = await getServerSession(authOptions);
   const post = await prisma.post.findMany({
+    include: {
+      user: true,
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -24,6 +27,9 @@ export async function Posts() {
           title={post.title}
           date={post.createdAt.toString()}
           key={post.id}
+          name={post.user.name!}
+          image={post.user.image!}
+          userId={post.user.id}
         />
       ))}
     </div>
