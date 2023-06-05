@@ -6,7 +6,7 @@ import Image from "next/image";
 export default async function UserCard({ userData }: { userData: User }) {
   return (
     <>
-      <Image
+      <img
         src={userData?.image!}
         alt={userData?.name!}
         width={50}

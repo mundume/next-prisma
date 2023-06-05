@@ -41,18 +41,19 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  bio           String?   @db.VarChar(255)
+  bio           String?      @db.VarChar(255)
   age           Int?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  following     Follows[] @relation("follower")
-  followedBy    Follows[] @relation("following")
-  Post          Post[]
+  following     Follows[]    @relation("follower")
+  followedBy    Follows[]    @relation("following")
+  posts         PostToUser[]
+  post          Post[]
 }
 
 model Follows {
@@ -76,14 +77,28 @@ model VerificationToken {
 
 //create a model for posts and update all the relationships in this schema
 model Post {
-  id        String   @id @default(cuid())
+  id        String       @id @default(cuid())
   title     String
   content   String?
-  published Boolean  @default(false)
+  published Boolean      @default(false)
   authorId  String
-  author    User     @relation(fields: [authorId], references: [id])
+  author    User         @relation(fields: [authorId], references: [id])
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  users     PostToUser[]
+
+  @@index([authorId])
+}
+
+model PostToUser {
+  user      User     @relation(fields: [userId], references: [id])
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([authorId])
+  @@id([postId, userId])
+  @@index([postId])
+  @@index([userId])
 }

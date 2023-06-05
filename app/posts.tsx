@@ -6,7 +6,11 @@ import { PostCard } from "./components/posts/PostCard";
 
 export async function Posts() {
   const session = await getServerSession(authOptions);
-  const post = await prisma.post.findMany();
+  const post = await prisma.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   if (!session) {
     redirect("/api/auth/signin");
