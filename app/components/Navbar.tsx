@@ -1,5 +1,7 @@
-import Link from "next/link";
+"use client";
+
 import React from "react";
+import { signOut } from "next-auth/react";
 
 function Navbar({ href }: { href: string }) {
   return (
@@ -10,6 +12,7 @@ function Navbar({ href }: { href: string }) {
         </a>
       </div>
       <div className="flex-none">
+        <button onClick={() => signOut()}>Logout</button>
         <button className="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"

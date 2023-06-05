@@ -9,7 +9,6 @@ export default function AddPosts() {
     const formData = new FormData(e.currentTarget);
     const body = {
       title: formData.get("title") as string,
-      content: formData.get("content") as string,
     };
     const response = await fetch(`/api/post`, {
       method: "POST",
@@ -20,6 +19,7 @@ export default function AddPosts() {
     });
 
     router.refresh();
+    console.log(response);
   };
   return (
     <div>

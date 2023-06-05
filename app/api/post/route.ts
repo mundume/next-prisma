@@ -5,17 +5,18 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-  const currentEmail = session?.user?.email!;
-  const data = await req.json();
+  const userId = await prisma.user.findUnique({
+    where: {
+      email: session?.user?.email!,
+    },
+  });
 
+  const body = await req.json();
+  const { title }: { title: string } = body;
   const post = await prisma.post.create({
     data: {
-      author: {
-        connect: {
-          email: currentEmail,
-        },
-      },
-      ...data,
+      title,
+      authorId: userId!.id,
     },
   });
 

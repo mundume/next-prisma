@@ -13,7 +13,7 @@ type Props = {
   id: string;
   date: string;
 };
-export async function PostCard({ title, content, id, date }: Props) {
+export async function PostCard({ title, id, date }: Props) {
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
   const user = await prisma.user.findUnique({
