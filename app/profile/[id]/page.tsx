@@ -21,6 +21,11 @@ export default async function page({ params }: Props) {
     where: {
       id: params.id,
     },
+    include: {
+      followedBy: true,
+      following:true
+    
+    }
   });
 
   return (

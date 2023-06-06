@@ -9,6 +9,7 @@ export async function Posts() {
   const post = await prisma.post.findMany({
     include: {
       user: true,
+      Comment: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -30,6 +31,7 @@ export async function Posts() {
           name={post.user.name!}
           image={post.user.image!}
           userId={post.user.id}
+          commentNumber={post.Comment.length}
         />
       ))}
     </div>

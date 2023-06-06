@@ -1,11 +1,10 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { prisma } from "@/lib/prisma";
-import { Post } from "@prisma/client";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import Image from "next/image";
 import Avatar from "../Avatar";
 import { relativeDate } from "@/utils/utils";
+import { MessageSquare } from "lucide-react";
+import { Heart } from "lucide-react";
 
 type Props = {
   title: string;
@@ -15,6 +14,7 @@ type Props = {
   name: string;
   userId: string;
   image: string;
+  commentNumber: number;
 };
 export async function PostCard({
   title,
@@ -23,6 +23,7 @@ export async function PostCard({
   name,
   userId,
   image,
+  commentNumber,
 }: Props) {
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
@@ -42,6 +43,13 @@ export async function PostCard({
         <Link href={`/post/${id}`} className="px-1 font-medium text-purple-600">
           {title}
         </Link>
+      </div>
+      <div className="flex items-center justify-between px-4 py-3">
+        <Link href={`/post/${id}`} className="flex items-center gap-1">
+          <MessageSquare />
+          {commentNumber}
+        </Link>
+        <Heart />
       </div>
     </div>
   );

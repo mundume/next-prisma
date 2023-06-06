@@ -1,5 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Avatar from "@/app/components/Avatar";
+import Comments from "@/app/components/comment/Comments";
+import AddComment from "@/app/components/comment/add-comments";
 import { prisma } from "@/lib/prisma";
 import { ArrowUpLeft } from "lucide-react";
 import { Metadata } from "next";
@@ -31,6 +33,15 @@ export default async function page({ params }: Props) {
       id: params.id,
     },
   });
+  const comments = await prisma.comment.findMany({
+    where: {
+      postId: params.id,
+    },
+    include: {
+      user: true,
+      post: true,
+    },
+  });
   return (
     <div className="p-4">
       <Link href="/" className="flex items-center gap-1 py-3">
@@ -43,11 +54,15 @@ export default async function page({ params }: Props) {
           {user?.name!}
         </Link>
       </div>
-      <div className="mx-12 ">
+      <div className="flex items-center py-2">
         <p className="px-1 font-medium text-purple-500 ">
           {currentPost?.title}
         </p>
       </div>
+      {comments.map((comment) => (
+        <Comments comment={comment.content!} key={comment.id} />
+      ))}
+      <AddComment id={params.id} />
     </div>
   );
 }
