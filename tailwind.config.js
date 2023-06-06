@@ -3,6 +3,9 @@ const twAnimate = require("tailwindcss-animate");
 const daisyui = require("daisyui");
 module.exports = {
   darkMode: ["class"],
+  daisyui: {
+    themes: ["light"],
+  },
 
   content: [
     "./pages/**/*.{ts,tsx}",
