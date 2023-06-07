@@ -27,7 +27,7 @@ export default function AddComment({ id }: { id: string }) {
   }
 
   return (
-    <form onSubmit={addComment}>
+    <form onSubmit={addComment} className="block">
       <input
         placeholder="add a comment"
         name="comment"
@@ -36,7 +36,7 @@ export default function AddComment({ id }: { id: string }) {
       />
       <button
         type="submit"
-        className="px-4 py-3 my-4 font-semibold text-white bg-purple-600 border-none rounded-md outline-none hover:bg-purple-400 active:bg-purple-500"
+        className="block px-4 py-3 my-4 font-semibold text-white bg-purple-600 border-none rounded-md outline-none hover:bg-purple-400 active:bg-purple-500"
       >
         Comment
       </button>
