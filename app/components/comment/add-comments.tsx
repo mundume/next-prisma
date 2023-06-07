@@ -1,6 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
+
 export default function AddComment({ id }: { id: string }) {
+  const router = useRouter();
+
+  const clearInput = useRef<HTMLInputElement>(null);
   async function addComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -16,6 +22,8 @@ export default function AddComment({ id }: { id: string }) {
         "Content-Type": "application/json",
       },
     });
+    clearInput.current!.value = "";
+    router.refresh();
   }
 
   return (
@@ -24,7 +32,14 @@ export default function AddComment({ id }: { id: string }) {
         placeholder="add a comment"
         name="comment"
         className="w-full max-w-xs textarea textarea-bordered textarea-lg"
+        ref={clearInput}
       />
+      <button
+        type="submit"
+        className="px-4 py-3 my-4 font-semibold text-white bg-purple-600 border-none rounded-md outline-none hover:bg-purple-400 active:bg-purple-500"
+      >
+        Comment
+      </button>
     </form>
   );
 }

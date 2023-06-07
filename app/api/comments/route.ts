@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
@@ -27,5 +26,6 @@ export async function POST(req: Request) {
       post: true,
     },
   });
+
   return NextResponse.json(comment);
 }

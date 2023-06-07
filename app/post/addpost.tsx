@@ -1,8 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 export default function AddPosts() {
+  const ref = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const addPost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,12 +21,14 @@ export default function AddPosts() {
     });
 
     router.refresh();
+    ref.current?.value != "";
     console.log(response);
   };
   return (
     <div>
       <form action="" onSubmit={addPost} className="flex items-center gap-1">
-        <textarea
+        <input
+          ref={ref}
           placeholder="What's Happening?"
           name="title"
           className="w-full border border-yellow-500 textarea textarea-lg"

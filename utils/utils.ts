@@ -8,18 +8,18 @@ export function relativeDate(date: string) {
   if (delta < 30) {
     return "just now";
   } else if (delta < minute) {
-    return delta + " seconds ago";
+    return delta + "s";
   } else if (delta < 2 * minute) {
     return "a minute ago";
   } else if (delta < hour) {
-    return Math.floor(delta / minute) + " minutes ago";
+    return Math.floor(delta / minute) + "m";
   } else if (Math.floor(delta / hour) == 1) {
-    return "1 hour ago";
+    return "1h";
   } else if (delta < day) {
-    return Math.floor(delta / hour) + " hours ago";
+    return Math.floor(delta / hour) + "h";
   } else if (delta < day * 2) {
-    return "yesterday";
+    return "1d";
   } else {
-    return delta + " days ago";
+    return delta + "d";
   }
 }

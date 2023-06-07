@@ -37,14 +37,16 @@ export async function PostCard({
             {name!}
           </Link>
         </div>
-        <small className="flex items-center ">{relativeDate(date)}</small>
+        <small className="flex items-center text-sm font-normal text-yellow-500 ">
+          {relativeDate(date)}
+        </small>
       </div>
       <div className="mx-12">
         <Link href={`/post/${id}`} className="px-1 font-medium text-purple-600">
           {title}
         </Link>
       </div>
-      <div className="flex items-center justify-between px-4 py-3">
+      <div className="flex items-center justify-between py-3 px-[50px]">
         <Link href={`/post/${id}`} className="flex items-center gap-1">
           <MessageSquare />
           {commentNumber}

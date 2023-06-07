@@ -43,26 +43,33 @@ export default async function page({ params }: Props) {
     },
   });
   return (
-    <div className="p-4">
+    <section className="p-4 m-2 rounded">
       <Link href="/" className="flex items-center gap-1 py-3">
         <ArrowUpLeft />
         <p>Back</p>
       </Link>
-      <div className="flex items-center gap-1">
+      <section role="div" className="flex items-center gap-1">
         <Avatar image={user?.image!} />
         <Link href={`/profile/${user?.id}`} className="font-bold">
           {user?.name!}
         </Link>
-      </div>
-      <div className="flex items-center py-2">
+      </section>
+      <section role="div" className="flex items-center py-2">
         <p className="px-1 font-medium text-purple-500 ">
           {currentPost?.title}
         </p>
-      </div>
+      </section>
       {comments.map((comment) => (
-        <Comments comment={comment.content!} key={comment.id} />
+        <Comments
+          comment={comment.content!}
+          key={comment.id}
+          image={comment.user.image!}
+          name={comment.user.name!}
+          date={comment.createdAt.toString()!}
+          postId={currentPost?.id!}
+        />
       ))}
       <AddComment id={params.id} />
-    </div>
+    </section>
   );
 }
