@@ -21,16 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: ` ${user?.name} BooBer Posts` };
 }
 export default async function page({ params }: Props) {
-  const session = await getServerSession(authOptions);
-  const email = session?.user?.email!;
-  const user = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
   const currentPost = await prisma.post.findUnique({
     where: {
       id: params.id,
+    },
+    include: {
+      user: true,
     },
   });
   const comments = await prisma.comment.findMany({
@@ -49,9 +45,9 @@ export default async function page({ params }: Props) {
         <p>Back</p>
       </Link>
       <section role="div" className="flex items-center gap-1">
-        <Avatar image={user?.image!} />
-        <Link href={`/profile/${user?.id}`} className="font-bold">
-          {user?.name!}
+        <Avatar image={currentPost?.user?.image!} />
+        <Link href={`/profile/${currentPost?.user?.id}`} className="font-bold">
+          {currentPost?.user?.name!}
         </Link>
       </section>
       <section role="div" className="flex items-center py-2">
@@ -67,6 +63,7 @@ export default async function page({ params }: Props) {
           name={comment.user.name!}
           date={comment.createdAt.toString()!}
           postId={currentPost?.id!}
+          userId={comment.user?.id!}
         />
       ))}
       <AddComment id={params.id} />

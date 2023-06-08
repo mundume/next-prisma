@@ -22,7 +22,9 @@ export default function AddComment({ id }: { id: string }) {
         "Content-Type": "application/json",
       },
     });
+    await response.json();
     clearInput.current!.value = "";
+
     router.refresh();
   }
 
