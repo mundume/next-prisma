@@ -15,7 +15,7 @@ export default function Comments({ comment, name, image, date, userId }: User) {
   return (
     <div className="px-4 py-2 my-2 text-gray-500 border rounded">
       <section className="flex items-center gap-1 ">
-        <Avatar image={image} />
+        <Avatar image={image} name={name} />
         <div className="flex items-center gap-2 ">
           <Link
             href={`/profile/${userId}`}
