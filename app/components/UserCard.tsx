@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import React from "react";
 import FollowButton from "./FollowButton/FollowButton";
 import Image from "next/image";
+import Avatar from "./Avatar";
 
 export default async function UserCard({ userData }: { userData: User }) {
   return (
@@ -9,13 +10,14 @@ export default async function UserCard({ userData }: { userData: User }) {
       <img
         src={userData?.image!}
         alt={userData?.name!}
-        width={50}
-        height={50}
+        className="object-cover w-full h-48"
       />
-      <small className="font-bold">{userData?.email!}</small>
+      <Avatar image={userData?.image!} name={userData?.name!} />
+
       <p className="font-semibold text-purple-600">{userData?.name}</p>
       <small className="font-bold">{userData?.age}</small>
-      <p className="text-gray-900">{userData?.bio}</p>
+
+      <p className="py-2 text-gray-500">{userData?.bio}</p>
       {/* //@ts-ignore */}
     </>
   );

@@ -32,7 +32,7 @@ export async function PostCard({
     <div className="p-4 mx-2 my-3 border rounded ">
       <div className="flex items-center justify-between gap-1 ">
         <div className="flex items-center gap-1">
-          <Avatar image={image!} />
+          <Avatar image={image!} name={name!} />
           <Link href={`/profile/${userId!}`} className="font-semibold ">
             {name!}
           </Link>

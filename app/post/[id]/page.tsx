@@ -45,7 +45,10 @@ export default async function page({ params }: Props) {
         <p>Back</p>
       </Link>
       <section role="div" className="flex items-center gap-1">
-        <Avatar image={currentPost?.user?.image!} />
+        <Avatar
+          image={currentPost?.user?.image!}
+          name={currentPost?.user?.name!}
+        />
         <Link href={`/profile/${currentPost?.user?.id}`} className="font-bold">
           {currentPost?.user?.name!}
         </Link>

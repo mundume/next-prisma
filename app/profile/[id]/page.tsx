@@ -42,11 +42,19 @@ export default async function page({ params }: Props) {
       <UserCard userData={userData} />
       {/* @ts-ignore */}
       <FollowButton targetUserId={params.id} />
-      <Link href={`/`} className="w-auto font-bold text-yellow-400">
-        return home
-      </Link>
-      <hr />
+      <div className="flex items-center gap-2 py-4 font-medium text-purple-600">
+        <p className="flex items-center gap-1">
+          <span className="text-lg">{userData?.following.length} </span>
+          <span className="text-sm text-gray-500">Following</span>
+        </p>
+        <p className="flex items-center gap-1">
+          <span className="text-lg">{userData?.followedBy.length} </span>
+          <span className="text-sm text-gray-500">Followers</span>
+        </p>
+      </div>
+
       {userData?.posts?.map((post) => (
+        // @ts-ignore
         <PostCard
           key={post.id}
           commentNumber={userData.Comment.length}

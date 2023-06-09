@@ -70,7 +70,7 @@ export default function MyModal({
                     as="h3"
                     className="flex items-center justify-start gap-1"
                   >
-                    <Avatar image={image} />
+                    <Avatar image={image} name={name} />
                     <p className="font-semibold">{name}</p>
                   </Dialog.Title>
                   <div className="pt-2">
