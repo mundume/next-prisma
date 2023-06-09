@@ -92,13 +92,20 @@ export default function MyModal({
                     </div>
                   </div>
 
-                  <div className="mt-4">
+                  <div className="flex justify-around gap-4 mt-4 ">
                     <button
                       type="button"
-                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-white bg-purple-400 border border-transparent rounded-md hover:bg-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 w-52"
                       onClick={closeModal}
                     >
-                      Got it, thanks!
+                      Go Back
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-purple-400 bg-white border  rounded-md hover:bg-purple-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 border-purple-400 w-52 "
+                      onClick={() => window.location.reload()}
+                    >
+                      View Full Profile
                     </button>
                   </div>
                 </Dialog.Panel>
