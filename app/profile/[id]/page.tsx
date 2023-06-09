@@ -42,16 +42,28 @@ export default async function page({ params }: Props) {
       <UserCard userData={userData} />
       {/* @ts-ignore */}
       <FollowButton targetUserId={params.id} />
-      <div className="flex items-center gap-2 py-4 font-medium text-purple-600">
-        <p className="flex items-center gap-1">
-          <span className="text-lg">{userData?.following.length} </span>
-          <span className="text-sm text-gray-500">Following</span>
-        </p>
-        <p className="flex items-center gap-1">
-          <span className="text-lg">{userData?.followedBy.length} </span>
-          <span className="text-sm text-gray-500">Followers</span>
-        </p>
-      </div>
+      <section className="flex items-center justify-between gap-2 py-4 font-medium text-purple-600">
+        <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1">
+            <p className="text-lg">{userData?.following.length} </p>
+            <p className="text-sm text-gray-500">Following</p>
+          </div>
+
+          <div className="flex items-center justify-between gap-1">
+            <div className="flex items-center gap-1">
+              <p className="text-lg">{userData?.followedBy.length} </p>
+              <p className="text-sm text-gray-500">Followers</p>
+            </div>
+          </div>
+        </div>
+        <Link
+          href="/editprofile"
+          type="button"
+          className="inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-purple-400 bg-white border  rounded-md hover:bg-purple-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
+        >
+          Edit Profile
+        </Link>
+      </section>
 
       {userData?.posts?.map((post) => (
         // @ts-ignore
