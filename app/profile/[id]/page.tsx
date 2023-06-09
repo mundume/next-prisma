@@ -1,7 +1,9 @@
 import FollowButton from "@/app/components/FollowButton/FollowButton";
 import UserCard from "@/app/components/UserCard";
+import { PostCard } from "@/app/components/posts/PostCard";
 
 import { prisma } from "@/lib/prisma";
+import { relativeDate } from "@/utils/utils";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -21,11 +23,17 @@ export default async function page({ params }: Props) {
     where: {
       id: params.id,
     },
+
     include: {
       followedBy: true,
-      following:true
-    
-    }
+      following: true,
+      posts: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+      Comment: true,
+    },
   });
 
   return (
@@ -37,6 +45,19 @@ export default async function page({ params }: Props) {
       <Link href={`/`} className="w-auto font-bold text-yellow-400">
         return home
       </Link>
+      <hr />
+      {userData?.posts?.map((post) => (
+        <PostCard
+          key={post.id}
+          commentNumber={userData.Comment.length}
+          date={post.createdAt.toString()}
+          id={post.id}
+          image={userData.image!}
+          name={userData.name!}
+          title={post.title}
+          userId={userData.id!}
+        />
+      ))}
     </div>
   );
 }

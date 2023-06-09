@@ -7,9 +7,14 @@ import { useState, useTransition } from "react";
 type Props = {
   targetUserId: string;
   isFollowing: boolean;
+  userId: string;
 };
 
-export default function FollowClient({ targetUserId, isFollowing }: Props) {
+export default function FollowClient({
+  targetUserId,
+  isFollowing,
+  userId,
+}: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -45,6 +50,7 @@ export default function FollowClient({ targetUserId, isFollowing }: Props) {
     });
     console.log(response);
   };
+  if (userId === targetUserId) return null;
   if (isFollowing) {
     return (
       <button
