@@ -30,7 +30,7 @@ export default async function Home() {
         <div className="">
           <Navbar href={`/`} />
           <div className="flex items-center gap-1">
-            <Avatar image={user?.image!} />
+            <Avatar image={user?.image!} name={user?.name!} />
             <AddPosts />
           </div>
           {/* @ts-ignore */}
