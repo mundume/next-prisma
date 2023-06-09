@@ -1,8 +1,10 @@
 "use client";
 
 import { User } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 export default function EditData({ user }: { user: User }) {
+  const router = useRouter();
   async function updateUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -22,6 +24,7 @@ export default function EditData({ user }: { user: User }) {
       },
     });
     await response.json();
+    router.back();
   }
   return (
     <div className="flex flex-col m-2">
