@@ -1,3 +1,4 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import FollowButton from "@/app/components/FollowButton/FollowButton";
 import UserCard from "@/app/components/UserCard";
 import { PostCard } from "@/app/components/posts/PostCard";
@@ -5,6 +6,7 @@ import { PostCard } from "@/app/components/posts/PostCard";
 import { prisma } from "@/lib/prisma";
 import { relativeDate } from "@/utils/utils";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 type Props = {
@@ -19,6 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function page({ params }: Props) {
+  const session = await getServerSession(authOptions);
+  const currentEmail = session?.user?.email;
   const userData = await prisma.user.findUnique({
     where: {
       id: params.id,
@@ -56,7 +60,7 @@ export default async function page({ params }: Props) {
             </div>
           </div>
         </div>
-        {userData?.id === params.id && (
+        {userData?.email === currentEmail && (
           <Link
             href="/editprofile"
             className="inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-purple-400 bg-white border  rounded-md hover:bg-purple-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
