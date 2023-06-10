@@ -6,11 +6,11 @@ import Avatar from "./Avatar";
 
 export default async function UserCard({ userData }: { userData: User }) {
   return (
-    <>
+    <div className="grid p-2">
       <img
         src={userData?.image!}
         alt={userData?.name!}
-        className="object-cover w-full h-48"
+        className="flex items-center justify-center object-cover w-full h-48 image-full"
       />
       <Avatar image={userData?.image!} name={userData?.name!} />
 
@@ -19,6 +19,6 @@ export default async function UserCard({ userData }: { userData: User }) {
 
       <p className="py-2 text-gray-500">{userData?.bio}</p>
       {/* //@ts-ignore */}
-    </>
+    </div>
   );
 }
