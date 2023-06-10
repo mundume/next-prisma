@@ -11,17 +11,17 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-  login,
+  modal,
 }: {
   children: React.ReactNode;
-  login: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <AuthProvider>
       <html lang="en">
         <body className={inter.className}>
           {children}
-          {login}
+          {modal}
         </body>
       </html>
     </AuthProvider>
