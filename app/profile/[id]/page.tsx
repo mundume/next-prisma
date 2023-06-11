@@ -1,10 +1,10 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import FollowButton from "@/app/components/FollowButton/FollowButton";
 import UserCard from "@/app/components/UserCard";
+import ProfilePostCard from "@/app/components/postCard/ProfilePostCard";
 import { PostCard } from "@/app/components/posts/PostCard";
 
 import { prisma } from "@/lib/prisma";
-import { relativeDate } from "@/utils/utils";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
@@ -72,7 +72,7 @@ export default async function page({ params }: Props) {
 
       {userData?.posts?.map((post) => (
         // @ts-ignore
-        <PostCard
+        <ProfilePostCard
           key={post.id}
           commentNumber={userData.Comment.length}
           date={post.createdAt.toString()}
