@@ -24,7 +24,7 @@ export default function ProfilePostCard({
   commentNumber,
 }: Props) {
   return (
-    <div className="p-4 mx-2 my-3 border rounded ">
+    <Link href={`/post/${id}`} className="p-4 mx-2 my-3 border rounded ">
       <div className="flex items-center justify-between gap-1 ">
         <div className="flex items-center gap-1">
           <Avatar image={image!} name={name!} />
@@ -35,17 +35,15 @@ export default function ProfilePostCard({
         </small>
       </div>
       <div className="mx-12">
-        <Link href={`/post/${id}`} className="px-1 font-medium text-purple-600">
-          {title}
-        </Link>
+        <p className="px-1 font-medium text-purple-600">{title}</p>
       </div>
       <div className="flex items-center justify-between py-3 px-[50px]">
-        <Link href={`/post/${id}`} className="flex items-center gap-1">
+        <p className="flex items-center gap-1">
           <MessageSquare />
           {commentNumber}
-        </Link>
+        </p>
         <Heart />
       </div>
-    </div>
+    </Link>
   );
 }
