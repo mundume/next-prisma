@@ -21,7 +21,7 @@ export default function AddPosts() {
     });
 
     router.refresh();
-    ref.current?.value != "";
+    ref.current!.value = "";
     console.log(response);
   };
   return (

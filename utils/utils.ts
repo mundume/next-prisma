@@ -19,7 +19,23 @@ export function relativeDate(date: string) {
     return Math.floor(delta / hour) + "h";
   } else if (delta < day * 2) {
     return "1d";
+  } else if (delta < day * 3) {
+    return "2d";
+  } else if (delta < day * 4) {
+    return "3d";
+  } else if (delta < day * 5) {
+    return "4d";
+  } else if (delta < day * 6) {
+    return "5d";
+  } else if (delta < day * 7) {
+    return "6d";
+  } else if (delta > day * 8 && delta <= day * 14) {
+    return "1w";
+  } else if (delta > day * 14 && delta <= day * 21) {
+    return "2w";
+  } else if (delta > day * 21 && delta <= day * 30) {
+    return "3w";
   } else {
-    return delta + "d";
+    return "30d+";
   }
 }
