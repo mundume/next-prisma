@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function page({ params }: Props) {
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email;
+
   const userData = await prisma.user.findUnique({
     where: {
       id: params.id,
@@ -35,8 +36,14 @@ export default async function page({ params }: Props) {
         orderBy: {
           createdAt: "desc",
         },
+        include: {
+          Comment: {
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
+        },
       },
-      Comment: true,
     },
   });
 
@@ -74,7 +81,7 @@ export default async function page({ params }: Props) {
         // @ts-ignore
         <ProfilePostCard
           key={post.id}
-          commentNumber={userData.Comment.length}
+          commentNumber={post.Comment.length}
           date={post.createdAt.toString()}
           id={post.id}
           image={userData.image!}

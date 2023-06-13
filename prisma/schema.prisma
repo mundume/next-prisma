@@ -112,8 +112,8 @@ model Likes {
   updatedAt DateTime @updatedAt
   authorId  String
   postId    String
-  user      User     @relation(fields: [authorId], references: [id])
-  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@index([authorId])
   @@index([postId])

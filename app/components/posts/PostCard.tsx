@@ -5,6 +5,9 @@ import Avatar from "../Avatar";
 import { relativeDate } from "@/utils/utils";
 import { MessageSquare } from "lucide-react";
 import { Heart } from "lucide-react";
+import { AiFillHeart } from "react-icons/ai";
+import { BiCommentDots } from "react-icons/bi";
+import LikeButton from "./LikeButton";
 
 type Props = {
   title: string;
@@ -48,10 +51,11 @@ export async function PostCard({
       </div>
       <div className="flex items-center justify-between py-3 px-[50px]">
         <Link href={`/post/${id}`} className="flex items-center gap-1">
-          <MessageSquare />
+          <BiCommentDots className="overflow-hidden text-2xl text-emerald-500" />
           {commentNumber}
         </Link>
-        <Heart />
+        {/* @ts-ignore */}
+        <LikeButton postId={id} userId={userId} />
       </div>
     </div>
   );

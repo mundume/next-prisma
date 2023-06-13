@@ -14,7 +14,7 @@ export default function AddComment({ id }: { id: string }) {
       title: formData.get("comment") as string,
       id: id,
     };
-    console.log(body.id);
+  
     const response = await fetch("/api/comments", {
       method: "POST",
       body: JSON.stringify(body),
