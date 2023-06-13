@@ -76,20 +76,6 @@ export default async function page({ params }: Props) {
           </Link>
         )}
       </section>
-
-      {userData?.posts?.map((post) => (
-        // @ts-ignore
-        <ProfilePostCard
-          key={post.id}
-          commentNumber={post.Comment.length}
-          date={post.createdAt.toString()}
-          id={post.id}
-          image={userData.image!}
-          name={userData.name!}
-          title={post.title}
-          userId={userData.id!}
-        />
-      ))}
     </div>
   );
 }
