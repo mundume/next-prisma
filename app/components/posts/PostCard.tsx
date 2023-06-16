@@ -4,7 +4,8 @@ import { getServerSession } from "next-auth";
 import Avatar from "../Avatar";
 import { relativeDate } from "@/utils/utils";
 import { BiCommentDots } from "react-icons/bi";
-import LikeButton from "./LikeButton";
+import LikeButton from "../likes/LikeButton";
+import RetweetButton from "../retweet/RetweetButton";
 
 type Props = {
   title: string;
@@ -56,7 +57,11 @@ export async function PostCard({
 
         <p className="flex items-center gap-1">
           {/* @ts-ignore */}
-          <LikeButton postId={id} userId={userId} />
+          <RetweetButton className="text-2xl text-yellow-400" postId={id} />
+        </p>
+        <p className="flex items-center gap-1">
+          {/* @ts-ignore */}
+          <LikeButton postId={id} />
           {likesNumber}
         </p>
       </div>

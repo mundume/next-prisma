@@ -4,12 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
-export default async function LikeButton({
-  postId,
-}: {
-  userId: string;
-  postId: string;
-}) {
+export default async function LikeButton({ postId }: { postId: string }) {
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email;
   if (!session) {

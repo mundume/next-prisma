@@ -41,20 +41,21 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  bio           String?   @db.VarChar(255)
+  bio           String?    @db.VarChar(255)
   age           Int?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  following     Follows[] @relation("follower")
-  followedBy    Follows[] @relation("following")
+  following     Follows[]  @relation("follower")
+  followedBy    Follows[]  @relation("following")
   posts         Post[]
   Comment       Comment[]
   likes         Likes[]
+  retweets      Retweets[]
 }
 
 model Follows {
@@ -78,16 +79,17 @@ model VerificationToken {
 
 //create a model for posts and update all the relationships in this schema
 model Post {
-  id        String    @id @default(cuid())
+  id        String     @id @default(cuid())
   title     String
   content   String?
-  published Boolean   @default(false)
+  published Boolean    @default(false)
   authorId  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  user      User      @relation(fields: [authorId], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [authorId], references: [id])
   Comment   Comment[]
   likes     Likes[]
+  retweets  Retweets[]
 
   @@index([authorId])
 }
@@ -107,6 +109,19 @@ model Comment {
 }
 
 model Likes {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+  postId    String
+  user      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([authorId])
+  @@index([postId])
+}
+
+model Retweets {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

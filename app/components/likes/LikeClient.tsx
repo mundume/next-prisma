@@ -1,6 +1,4 @@
 "use client";
-
-import { prisma } from "@/lib/prisma";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
