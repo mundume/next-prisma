@@ -81,13 +81,13 @@ export default function MyModal({
                       {bio}.
                     </p>
                     <div className="flex items-center gap-2 py-2 font-medium text-purple-600">
+                      <div className="flex items-center gap-1">
+                        <p className="text-lg">{followers} </p>
+                        <p className="text-sm text-gray-500">followers</p>
+                      </div>
                       <p className="flex items-center gap-1">
-                        <span className="text-lg">{followers} </span>
-                        <span className="text-sm text-gray-500">followers</span>
-                      </p>
-                      <p className="flex items-center gap-1">
-                        <span className="text-lg">{following} </span>
-                        <span className="text-sm text-gray-500">following</span>
+                        <p className="text-lg">{following} </p>
+                        <p className="text-sm text-gray-500">following</p>
                       </p>
                     </div>
                   </div>

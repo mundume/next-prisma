@@ -27,6 +27,7 @@ export default async function page({ params }: Props) {
     },
     include: {
       user: true,
+      likes: true,
     },
   });
   const comments = await prisma.comment.findMany({

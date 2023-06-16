@@ -25,10 +25,12 @@ export default async function page({ params }: Props) {
               createdAt: "desc",
             },
           },
+          likes: true,
         },
       },
     },
   });
+
   return (
     <div className="grid gap-1 p-2">
       {userData?.posts?.map((post) => (
@@ -42,6 +44,8 @@ export default async function page({ params }: Props) {
           name={userData.name!}
           title={post.title}
           userId={userData.id!}
+          likes={post.likes}
+          isLiked={post.likes.some((like) => like.authorId === userData.id)}
         />
       ))}
     </div>

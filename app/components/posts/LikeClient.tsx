@@ -1,5 +1,6 @@
 "use client";
 
+import { prisma } from "@/lib/prisma";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
@@ -9,11 +10,13 @@ export default function LikeClient({
   postId,
   isLiked,
   id,
+  LikedUserId,
 }: {
   userId: string;
   postId: string;
   isLiked: boolean;
   id: string;
+  LikedUserId: string;
 }) {
   const [liked, setLiked] = useState(isLiked);
   const router = useRouter();
@@ -41,7 +44,7 @@ export default function LikeClient({
   };
   return (
     <AiFillHeart
-      onClick={isLiked ? unlike : like}
+      onClick={isLiked && userId === LikedUserId ? unlike : like}
       className={
         liked
           ? "overflow-hidden text-2xl text-purple-400 transition duration-200 ease-in-out"

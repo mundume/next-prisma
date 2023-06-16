@@ -23,6 +23,9 @@ export default async function LikeButton({
       authorId: userId,
       postId: postId,
     },
+    include: {
+      user: true,
+    },
   });
 
   return (
@@ -31,6 +34,7 @@ export default async function LikeButton({
       postId={postId}
       isLiked={!!isLiked}
       id={isLiked?.id!}
+      LikedUserId={isLiked?.user.id!}
     />
   );
 }

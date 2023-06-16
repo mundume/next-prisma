@@ -3,9 +3,6 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import Avatar from "../Avatar";
 import { relativeDate } from "@/utils/utils";
-import { MessageSquare } from "lucide-react";
-import { Heart } from "lucide-react";
-import { AiFillHeart } from "react-icons/ai";
 import { BiCommentDots } from "react-icons/bi";
 import LikeButton from "./LikeButton";
 
@@ -18,6 +15,7 @@ type Props = {
   userId: string;
   image: string;
   commentNumber: number;
+  likesNumber: number;
 };
 export async function PostCard({
   title,
@@ -27,6 +25,7 @@ export async function PostCard({
   userId,
   image,
   commentNumber,
+  likesNumber,
 }: Props) {
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
@@ -54,8 +53,12 @@ export async function PostCard({
           <BiCommentDots className="overflow-hidden text-2xl text-emerald-500" />
           {commentNumber}
         </Link>
-        {/* @ts-ignore */}
-        <LikeButton postId={id} userId={userId} />
+
+        <p className="flex items-center gap-1">
+          {/* @ts-ignore */}
+          <LikeButton postId={id} userId={userId} />
+          {likesNumber}
+        </p>
       </div>
     </div>
   );

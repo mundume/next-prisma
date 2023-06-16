@@ -2,6 +2,7 @@ import Link from "next/link";
 import Avatar from "../Avatar";
 import { relativeDate } from "@/utils/utils";
 import { Heart, MessageSquare } from "lucide-react";
+import { AiFillHeart } from "react-icons/ai";
 
 type Props = {
   title: string;
@@ -12,6 +13,8 @@ type Props = {
   userId: string;
   image: string;
   commentNumber: number;
+  likes: any;
+  isLiked: boolean;
 };
 
 export default function ProfilePostCard({
@@ -22,6 +25,8 @@ export default function ProfilePostCard({
   userId,
   image,
   commentNumber,
+  likes,
+  isLiked,
 }: Props) {
   return (
     <Link href={`/post/${id}`} className="p-4 mx-2 my-3 border rounded ">
@@ -42,7 +47,16 @@ export default function ProfilePostCard({
           <MessageSquare />
           {commentNumber}
         </p>
-        <Heart />
+        <p className="flex items-center gap-1">
+          <AiFillHeart
+            className={
+              isLiked
+                ? "overflow-hidden text-2xl text-purple-400 transition duration-200 ease-in-out"
+                : "text-slate-200 text-2xl transition duration-200 ease-in-out"
+            }
+          />{" "}
+          {likes.length}
+        </p>
       </div>
     </Link>
   );

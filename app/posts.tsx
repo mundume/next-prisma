@@ -10,6 +10,7 @@ export async function Posts() {
     include: {
       user: true,
       Comment: true,
+      likes: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -32,6 +33,7 @@ export async function Posts() {
           image={post.user.image!}
           userId={post.user.id}
           commentNumber={post.Comment.length}
+          likesNumber={post.likes.length}
         />
       ))}
     </div>
