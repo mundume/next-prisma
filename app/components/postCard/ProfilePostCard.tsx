@@ -2,7 +2,7 @@ import Link from "next/link";
 import Avatar from "../Avatar";
 import { relativeDate } from "@/utils/utils";
 import { Heart, MessageSquare } from "lucide-react";
-import { AiFillHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineRetweet } from "react-icons/ai";
 
 type Props = {
   title: string;
@@ -15,6 +15,8 @@ type Props = {
   commentNumber: number;
   likes: any;
   isLiked: boolean;
+  isRetweeted: boolean;
+  retweets: number;
 };
 
 export default function ProfilePostCard({
@@ -27,6 +29,8 @@ export default function ProfilePostCard({
   commentNumber,
   likes,
   isLiked,
+  isRetweeted,
+  retweets,
 }: Props) {
   return (
     <Link href={`/post/${id}`} className="p-4 mx-2 my-3 border rounded ">
@@ -46,6 +50,17 @@ export default function ProfilePostCard({
         <p className="flex items-center gap-1">
           <MessageSquare />
           {commentNumber}
+        </p>
+
+        <p className="flex items-center gap-1">
+          <AiOutlineRetweet
+            className={
+              isRetweeted
+                ? "overflow-hidden text-2xl text-yellow-400 transition duration-200 ease-in-out"
+                : "text-slate-200 text-2xl transition duration-200 ease-in-out"
+            }
+          />{" "}
+          {retweets}
         </p>
         <p className="flex items-center gap-1">
           <AiFillHeart

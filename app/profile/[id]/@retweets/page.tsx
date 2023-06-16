@@ -1,6 +1,6 @@
 import ProfilePostCard from "@/app/components/postCard/ProfilePostCard";
 import { prisma } from "@/lib/prisma";
-import React from "react";
+
 type Props = {
   params: {
     id: string;
@@ -8,18 +8,15 @@ type Props = {
 };
 
 export default async function page({ params }: Props) {
-  const userData = await prisma.user.findUnique({
+  const likedPosts = await prisma.retweets.findMany({
     where: {
-      id: params.id,
+      authorId: params.id,
     },
     include: {
-      followedBy: true,
-      following: true,
-      posts: {
-        orderBy: {
-          createdAt: "desc",
-        },
+      user: true,
+      post: {
         include: {
+          user: true,
           Comment: {
             where: {
               authorId: params.id,
@@ -32,6 +29,12 @@ export default async function page({ params }: Props) {
             where: {
               authorId: params.id,
             },
+
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
+          retweets: {
             orderBy: {
               createdAt: "desc",
             },
@@ -43,19 +46,22 @@ export default async function page({ params }: Props) {
 
   return (
     <div className="grid gap-1 p-2">
-      {userData?.posts?.map((post) => (
-        // @ts-ignore
+      {likedPosts.map((post) => (
         <ProfilePostCard
           key={post.id}
-          commentNumber={post.Comment.length}
+          retweets={post.post.retweets.length}
+          commentNumber={post.post.Comment.length}
           date={post.createdAt.toString()}
           id={post.id}
-          image={userData.image!}
-          name={userData.name!}
-          title={post.title}
-          userId={userData.id!}
-          likes={post.likes}
-          isLiked={post.likes.some((like) => like.authorId === userData.id)}
+          image={post.post.user.image!}
+          name={post.post.user.name!}
+          title={post.post.title}
+          userId={post.user.id!}
+          likes={post.post.retweets.length}
+          isLiked={post.post.likes.some((like) => like.authorId === params.id)}
+          isRetweeted={post.post.retweets.some(
+            (retweet) => retweet.authorId === params.id
+          )}
         />
       ))}
     </div>
