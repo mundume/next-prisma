@@ -35,16 +35,21 @@ export default function LikeClient({
     setLiked(true);
   };
   const unlike = async () => {
-    const res = await fetch(`/api/likes?id=${id}`, {
-      method: "DELETE",
-    });
-    console.log(res);
-    router.refresh();
-    setLiked(false);
+    console.log(LikedUserId, userId);
+    if (LikedUserId === userId) {
+      const res = await fetch(`/api/likes?id=${id}`, {
+        method: "DELETE",
+      });
+      console.log(res);
+      router.refresh();
+      setLiked(false);
+    } else {
+      console.log(" cant unlike");
+    }
   };
   return (
     <AiFillHeart
-      onClick={isLiked && userId === LikedUserId ? unlike : like}
+      onClick={isLiked ? unlike : like}
       className={
         liked
           ? "overflow-hidden text-2xl text-purple-400 transition duration-200 ease-in-out"

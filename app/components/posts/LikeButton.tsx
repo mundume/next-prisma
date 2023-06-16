@@ -5,7 +5,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
 export default async function LikeButton({
-  userId,
   postId,
 }: {
   userId: string;
@@ -16,6 +15,13 @@ export default async function LikeButton({
   if (!session) {
     redirect("/api/auth/signin");
   }
+  const userId = await prisma.user
+    .findUnique({
+      where: {
+        email: currentEmail!,
+      },
+    })
+    .then((user) => user?.id!);
 
   // check if the user has already liked the post
   const isLiked = await prisma.likes.findFirst({
