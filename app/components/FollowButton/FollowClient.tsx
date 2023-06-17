@@ -55,7 +55,7 @@ export default function FollowClient({
     return (
       <button
         onClick={unfollow}
-        className={clsx("bg-yellow-400 text-white px-2 py-2 rounded-md")}
+        className={clsx("bg-yellow-400 text-white px-3 py-2 rounded-md mx-2 ")}
       >
         {!isMutating ? "Unfollow" : "..."}
       </button>
