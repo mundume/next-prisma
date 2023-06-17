@@ -51,13 +51,13 @@ export default async function page({ params }: Props) {
       {/* @ts-ignore */}
       <FollowButton targetUserId={params.id} />
       <section className="flex items-center justify-between gap-2 py-4 font-medium text-purple-600">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 px-2">
           <div className="flex items-center gap-1">
             <p className="text-lg">{userData?.following.length} </p>
             <p className="text-sm text-gray-500">Following</p>
           </div>
 
-          <div className="flex items-center justify-between gap-1 px-2">
+          <div className="flex items-center justify-between gap-1">
             <div className="flex items-center gap-1">
               <p className="text-lg">{userData?.followedBy.length} </p>
               <p className="text-sm text-gray-500">Followers</p>
