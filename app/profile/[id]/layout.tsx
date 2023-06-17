@@ -14,7 +14,9 @@ export default function Layout({ children, likes, users, retweets }: Props) {
   return (
     <div>
       {children}
-      <MyTabs users={users} likes={likes} retweets={retweets} />
+      <div className="flex items-center">
+        <MyTabs users={users} likes={likes} retweets={retweets} />
+      </div>
     </div>
   );
 }
