@@ -12,6 +12,9 @@ export default async function page({ params }: Props) {
     where: {
       authorId: params.id,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
     include: {
       user: true,
       post: {
@@ -45,21 +48,22 @@ export default async function page({ params }: Props) {
 
   return (
     <div className="grid gap-1 p-2">
-      {likedPosts.map((post) => (
+      {likedPosts.map((item) => (
         <ProfilePostCard
-          key={post.id}
-          commentNumber={post.post.Comment.length}
-          date={post.createdAt.toString()}
-          id={post.id}
-          image={post.post.user.image!}
-          name={post.post.user.name!}
-          title={post.post.title}
-          userId={post.user.id!}
-          likes={post.post.likes}
-          isLiked={post.post.likes.some((like) => like.authorId === params.id)}
-          isRetweeted={post.post.retweets.some(
+          key={item.id}
+          commentNumber={item.post.Comment.length}
+          date={item.createdAt.toString()}
+          id={item.id}
+          image={item.post.user.image!}
+          name={item.post.user.name!}
+          title={item.post.title}
+          userId={item.user.id!}
+          likes={item.post.likes}
+          isLiked={item.post.likes.some((like) => like.authorId === params.id)}
+          isRetweeted={item.post.retweets.some(
             (retweet) => retweet.authorId === params.id
           )}
+          retweets={item.post.retweets.length}
         />
       ))}
     </div>
