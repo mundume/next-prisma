@@ -52,7 +52,7 @@ export default async function page({ params }: Props) {
           retweets={post.post.retweets.length}
           commentNumber={post.post.Comment.length}
           date={post.createdAt.toString()}
-          id={post.id}
+          id={post.post.id}
           image={post.post.user.image!}
           name={post.post.user.name!}
           title={post.post.title}

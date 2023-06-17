@@ -53,7 +53,7 @@ export default async function page({ params }: Props) {
           key={item.id}
           commentNumber={item.post.Comment.length}
           date={item.createdAt.toString()}
-          id={item.id}
+          id={item.post.id}
           image={item.post.user.image!}
           name={item.post.user.name!}
           title={item.post.title}
