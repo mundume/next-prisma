@@ -1,9 +1,10 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import EditData from "./EditData";
 import { Metadata } from "next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import EditData from "../EditData";
 
 type Props = {
   params: {
@@ -19,14 +20,14 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: `User profile of ${user?.name}` };
 }
 
-export default async function page() {
+export default async function page({params}:Props) {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/api/auth/signin");
   }
   const userInfo = await prisma.user.findUnique({
     where: {
-      email: session?.user?.email!,
+      id: params.id,
     },
   });
   return (
