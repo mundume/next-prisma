@@ -32,7 +32,7 @@ export async function PostCard({
   const email = session?.user?.email;
 
   return (
-    <div className="">
+    <div className="text-gray-600">
       <div className="flex flex-col justify-around p-4 mx-2 my-3 min-h-[250px] border rounded ">
         <div className="flex items-center justify-between gap-1 ">
           <div className="flex items-center gap-1">

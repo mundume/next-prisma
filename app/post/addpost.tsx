@@ -35,7 +35,7 @@ export default function AddPosts() {
             ref={ref}
             placeholder="What's Happening?"
             name="title"
-            className="w-full border border-yellow-500 textarea textarea-lg"
+            className="w-full border border-yellow-500 textarea textarea-lg md:h-[100px]"
           />
           <button
             type="submit"

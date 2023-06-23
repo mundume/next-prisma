@@ -27,9 +27,9 @@ export function relativeDate(date: string) {
     return "4d";
   } else if (delta < day * 6) {
     return "5d";
-  } else if (delta <= day * 7) {
+  } else if (delta < day * 7) {
     return "6d";
-  } else if (delta > day * 8 && delta <= day * 14) {
+  } else if (delta > day * 7 && delta <= day * 14) {
     return "1w";
   } else if (delta > day * 14 && delta <= day * 21) {
     return "2w";

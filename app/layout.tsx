@@ -1,5 +1,6 @@
 import AuthProvider from "./AuthProvider";
 import Navbar from "./components/Navbar";
+import SideBar from "./components/sidebar/SideBar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -22,7 +23,10 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <div className="min-h-screen grid-flow-col md:grid md:grid-cols-8 ">
-            <div className="hidden md:block md:col-span-2">aparo</div>
+            <div className="hidden p-2 border-r md:block md:col-span-2">
+              {/* @ts-ignore */}
+              <SideBar/>
+            </div>
             <div className="md:col-span-6">
               {children}
               {modal}
