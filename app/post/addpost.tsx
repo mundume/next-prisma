@@ -12,6 +12,9 @@ export default function AddPosts() {
     const body = {
       title: formData.get("title") as string,
     };
+    if (body.title === "") {
+      throw new Error("Post cannot be empty");
+    }
     const response = await fetch(`/api/post`, {
       method: "POST",
       body: JSON.stringify(body),

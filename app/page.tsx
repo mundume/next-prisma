@@ -33,8 +33,10 @@ export default async function Home() {
             <Avatar image={user?.image!} name={user?.name!} />
             <AddPosts />
           </div>
-          {/* @ts-ignore */}
-          <Posts />
+          <div className="flex items-center ">
+            {/* @ts-ignore */}
+            <Posts />
+          </div>
         </div>
       ) : (
         <div className={clsx("flex justify-between ")}>

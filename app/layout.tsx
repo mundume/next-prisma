@@ -1,4 +1,5 @@
 import AuthProvider from "./AuthProvider";
+import Navbar from "./components/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -20,8 +21,13 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en">
         <body className={inter.className}>
-          {children}
-          {modal}
+          <div className="min-h-screen grid-flow-col md:grid md:grid-cols-8 ">
+            <div className="hidden md:block md:col-span-2">aparo</div>
+            <div className="md:col-span-6">
+              {children}
+              {modal}
+            </div>
+          </div>
         </body>
       </html>
     </AuthProvider>

@@ -14,7 +14,10 @@ export default function AddComment({ id }: { id: string }) {
       title: formData.get("comment") as string,
       id: id,
     };
-  
+    if (body.title === "") {
+      throw new Error("Comment cannot be empty");
+    }
+
     const response = await fetch("/api/comments", {
       method: "POST",
       body: JSON.stringify(body),

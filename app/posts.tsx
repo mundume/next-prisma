@@ -21,7 +21,7 @@ export async function Posts() {
     redirect("/api/auth/signin");
   }
   return (
-    <div>
+    <div className="">
       {post.map((post) => (
         //@ts-ignore
         <PostCard
