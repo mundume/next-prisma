@@ -6,7 +6,6 @@ import { prisma } from "@/lib/prisma";
 import clsx from "clsx";
 import AddPosts from "./post/addpost";
 import { Posts } from "./posts";
-import Navbar from "./components/Navbar";
 import Avatar from "./components/Avatar";
 
 type Data = {
@@ -27,8 +26,8 @@ export default async function Home() {
   return (
     <div className="p-2">
       {session ? (
-        <div className="">
-          <Navbar href={`/`} />
+        <div className="flex flex-col items-center">
+         
           <div className="flex items-center gap-1">
             <Avatar image={user?.image!} name={user?.name!} />
             <AddPosts />

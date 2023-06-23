@@ -5,7 +5,7 @@ import { signOut } from "next-auth/react";
 
 function Navbar({ href }: { href: string }) {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 px-14">
       <div className="flex-1">
         <a href={href} className="text-xl normal-case btn btn-ghost">
           Twinder

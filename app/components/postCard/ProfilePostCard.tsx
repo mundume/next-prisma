@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Avatar from "../Avatar";
 import { relativeDate } from "@/utils/utils";
-import { Heart, MessageSquare } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { AiFillHeart, AiOutlineRetweet } from "react-icons/ai";
 
 type Props = {

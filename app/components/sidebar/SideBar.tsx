@@ -15,7 +15,7 @@ export default async function SideBar() {
     },
   }).then((user) => user?.id);
   return (
-      <div className="fixed p-16 ">
+      <div className="fixed px-16 ">
           
           <SideBarLinks href="/" text="Home" icon={<BiHomeCircle className="text-2xl text-purple-500" />} />
           <SideBarLinks href={`/profile/${userId}`} text="Profile" icon={<RxAvatar className="text-2xl text-purple-500" />} />

@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 
+export const runtime = 'edge'
+
 export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email!;

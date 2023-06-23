@@ -22,12 +22,13 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en">
         <body className={inter.className}>
+          <Navbar href="/" />
           <div className="min-h-screen grid-flow-col md:grid md:grid-cols-8 ">
             <div className="hidden p-2 border-r md:block md:col-span-2">
               {/* @ts-ignore */}
               <SideBar/>
             </div>
-            <div className="md:col-span-6">
+            <div className="md:col-span-4">
               {children}
               {modal}
             </div>

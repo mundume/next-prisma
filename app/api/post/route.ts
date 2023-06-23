@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
 
+
+export const runtime = 'edge'
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   const userId = await prisma.user.findUnique({
