@@ -28,7 +28,7 @@ const session = await getServerSession(authOptions)
       <div className="flex-none px-5">
        
 
-        <AvatarSheet  name={currentUser?.name!} image={currentUser?.image!} followers={currentUser?.followedBy.length} following={currentUser?.following.length!} email={currentUser?.email!} bio={currentUser?.bio!} />
+        <AvatarSheet  name={currentUser?.name!} image={currentUser?.image!} followers={currentUser?.followedBy.length} following={currentUser?.following.length!} email={currentUser?.email!} bio={currentUser?.bio!} id={currentUser?.id!} /> 
        
       </div>
     </div>

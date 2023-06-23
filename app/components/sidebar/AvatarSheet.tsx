@@ -1,4 +1,5 @@
 "use client"
+import { RxAvatar } from "react-icons/rx"
 import Avatar from "../Avatar"
 import {
   Sheet,
@@ -8,6 +9,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./sheetComponent"
+import { LuEdit } from "react-icons/lu"
+import SideBarLinks from "./SideBarLinks"
 
 type Props = {
     name: string,
@@ -15,7 +18,8 @@ type Props = {
     followers?: number
     following?: number
     email: string
-    bio?: string
+  bio?: string
+    id:string
     
     
 }
@@ -23,7 +27,7 @@ type Props = {
 
 
 
-export default function AvatarSheet({followers, following, name, image, email, bio} :Props) {
+export default function AvatarSheet({followers, following, name, image, email, id} :Props) {
     
   return (
    <Sheet>
@@ -52,7 +56,10 @@ export default function AvatarSheet({followers, following, name, image, email, b
                         <p className="text-sm text-gray-500">following</p>
                       </p>
                     </div>
-                  
+            <div className="py-5">
+              <SideBarLinks href={`/profile/${id}`} text="Profile" icon={<RxAvatar className="text-2xl text-purple-500" />} />
+          <SideBarLinks href={`/editprofile/${id}`} text="Edit Profile" icon={<LuEdit className="text-2xl text-purple-500"/>}   />
+                  </div>
       </SheetDescription>
     </SheetHeader>
   </SheetContent>
