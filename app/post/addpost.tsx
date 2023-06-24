@@ -1,38 +1,34 @@
-"use client";
+import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
-import { useRouter } from "next/navigation";
-import { useRef } from "react";
+export default async function AddPosts() {
+  const session = await getServerSession(authOptions);
+  const userId = await prisma.user.findUnique({
+    where: {
+      email: session?.user?.email!,
+    },
+  });
+  const addPost = async (data: FormData) => {
+    "use server";
 
-export default function AddPosts() {
-  const ref = useRef<HTMLInputElement>(null);
-  const router = useRouter();
-  const addPost = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const body = {
-      title: formData.get("title") as string,
-    };
-    if (body.title === "") {
-      throw new Error("Post cannot be empty");
+    const title = data.get("title") as string;
+    if (title === "") {
+      throw new Error("Post can't be empty");
     }
-    const response = await fetch(`/api/post`, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
+    await prisma.post.create({
+      data: {
+        title,
+        authorId: userId!.id,
       },
     });
-
-    router.refresh();
-    ref.current!.value = "";
-    console.log(response);
+    data.set("title", "");
   };
   return (
     <div className="flex items-center justify-center">
       <div>
-        <form action="" onSubmit={addPost} className="flex items-center gap-1">
+        <form action={addPost} className="flex items-center gap-1">
           <input
-            ref={ref}
             placeholder="What's Happening?"
             name="title"
             className="w-full border border-yellow-500 textarea textarea-lg md:h-[100px]"

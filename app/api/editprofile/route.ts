@@ -16,8 +16,8 @@ export async function PUT(req: Request) {
       email: currentEmail,
     },
     data: {
-      name: data.get
-    }
+      name: data.get,
+    },
   });
 
   return NextResponse.json(user);

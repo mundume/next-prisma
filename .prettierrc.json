@@ -1,0 +1,9 @@
+
+
+
+{
+    "ignore": [
+        "build",
+        "coverage"
+    ]
+}

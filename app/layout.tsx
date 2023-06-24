@@ -27,7 +27,7 @@ export default function RootLayout({
           <div className="min-h-screen grid-flow-col md:grid md:grid-cols-8 ">
             <div className="hidden p-2 border-r md:block md:col-span-2">
               {/* @ts-ignore */}
-              <SideBar/>
+              <SideBar />
             </div>
             <div className="md:col-span-4">
               {children}

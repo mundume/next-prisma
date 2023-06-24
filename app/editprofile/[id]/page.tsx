@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: `User profile of ${user?.name}` };
 }
 
-export default async function page({params}:Props) {
+export default async function page({ params }: Props) {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/api/auth/signin");

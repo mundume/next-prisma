@@ -1,5 +1,3 @@
-
-
 import { prisma } from "@/lib/prisma";
 import { User } from "@prisma/client";
 import { getServerSession } from "next-auth";
@@ -7,31 +5,29 @@ import { useRouter } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export default function EditData({ user }: { user: User }) {
+  async function updateUserData(data: FormData) {
+    "use server";
+    const session = await getServerSession(authOptions);
+    const currentEmail = session?.user?.email!;
 
-  async function updateUserData(data:FormData) {
-    "use server"
-   const session = await getServerSession(authOptions);
-  const currentEmail = session?.user?.email!;
-  
     await prisma.user.update({
       where: {
-        email: currentEmail
+        email: currentEmail,
       },
       data: {
         name: data.get("name") as string,
         bio: data.get("bio") as string,
         age: Number(data.get("age")),
-        image: data.get("image") as string
-
-      }
-    })
+        image: data.get("image") as string,
+      },
+    });
   }
   return (
     <div className="flex flex-col m-2">
       <h1 className="text-xl font-semibold text-purple-500 ">
         Edit Your Profile
       </h1>
-      <form  className="flex flex-col gap-1"  action={updateUserData}>
+      <form className="flex flex-col gap-1" action={updateUserData}>
         <label htmlFor="name">Name</label>
         <input
           type="text"
