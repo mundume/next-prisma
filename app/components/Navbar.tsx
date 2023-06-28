@@ -3,6 +3,8 @@ import React from "react";
 import AvatarSheet from "./sidebar/AvatarSheet";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
+import { BiCameraHome } from "react-icons/bi";
 
 async function Navbar({ href }: { href: string }) {
   const session = await getServerSession(authOptions);
@@ -17,13 +19,13 @@ async function Navbar({ href }: { href: string }) {
     },
   });
   return (
-    <div className="navbar bg-base-100 md:px-14">
+    <div className="px-2 navbar bg-base-100 md:px-4">
       <div className="flex-1">
-        <a href={href} className="text-xl normal-case btn btn-ghost">
-          Twinder
-        </a>
+        <Link href={href} className="text-xl normal-case">
+          <BiCameraHome className="text-3xl text-purple-500" />
+        </Link>
       </div>
-      <div className="flex-none px-5">
+      <div className="flex-none md:px-5">
         <AvatarSheet
           name={currentUser?.name!}
           image={currentUser?.image!}

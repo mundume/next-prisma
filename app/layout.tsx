@@ -23,7 +23,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           {/* @ts-ignore */}
-          <Navbar href="/" />
+
           <div className="min-h-screen grid-flow-col md:grid md:grid-cols-8 ">
             <div className="hidden p-2 border-r md:block md:col-span-2">
               {/* @ts-ignore */}

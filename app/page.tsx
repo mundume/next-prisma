@@ -7,13 +7,9 @@ import clsx from "clsx";
 import AddPosts from "./post/addpost";
 import { Posts } from "./posts";
 import Avatar from "./components/Avatar";
+import Navbar from "./components/Navbar";
 
-type Data = {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-};
+export const revalidate = 60;
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -24,24 +20,34 @@ export default async function Home() {
   });
 
   return (
-    <div className="p-2">
-      {session ? (
-        <div className="flex flex-col items-center">
-          <div className="flex items-center gap-1">
-            <Avatar image={user?.image!} name={user?.name!} />
-            {/* @ts-ignore */}
-            <AddPosts />
-          </div>
-          <div className="flex items-center ">
-            {/* @ts-ignore */}
-            <Posts />
-          </div>
-        </div>
-      ) : (
-        <div className={clsx("flex justify-between ")}>
-          <Link href="/api/auth/signin">Sign in</Link>
-        </div>
+    <div className={clsx("border")}>
+      {session && (
+        // @ts-ignore server component cant ne rendered as jsx
+        <Navbar href="/" />
       )}
+      <div className="p-2">
+        {session ? (
+          <>
+            {/* @ts-ignore */}
+
+            <div className="flex flex-col items-center">
+              <div className="flex items-center gap-1">
+                <Avatar image={user?.image!} name={user?.name!} />
+
+                <AddPosts />
+              </div>
+              <div className="flex items-center ">
+                {/* @ts-ignore */}
+                <Posts />
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className={clsx("flex justify-between ")}>
+            <Link href="/api/auth/signin">Sign in</Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -13,7 +13,7 @@ function classNames(...classes: string[]) {
 export default function MyTabs({ users, likes, retweets }: Props) {
   const tabscss = ` outline-none text-sm font-medium text-purple-500  focus:underline `;
   return (
-    <div className="items-center block w-full max-w-md py-2 m-auto ">
+    <div className="items-center block w-full py-2 m-auto ">
       <Tab.Group>
         <Tab.List className="flex justify-between w-full px-5">
           <Tab className={tabscss}>Posts</Tab>

@@ -33,7 +33,10 @@ export default function ProfilePostCard({
   retweets,
 }: Props) {
   return (
-    <Link href={`/post/${id}`} className="p-4 mx-2 my-3 border rounded ">
+    <Link
+      href={`/post/${id}`}
+      className="p-4 mx-2 my-3 border rounded  min-h-[250px] flex flex-col justify-around "
+    >
       <div className="flex items-center justify-between gap-1 ">
         <div className="flex items-center gap-1">
           <Avatar image={image!} name={name!} />
