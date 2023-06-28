@@ -9,7 +9,13 @@ export async function Posts() {
   const session = await getServerSession(authOptions);
   const post = await prisma.post.findMany({
     include: {
-      user: true,
+      user: {
+        include: {
+          followedBy: true,
+          following: true,
+        },
+      },
+
       Comment: true,
       likes: true,
     },
@@ -35,6 +41,9 @@ export async function Posts() {
           userId={post.user.id}
           commentNumber={post.Comment.length}
           likesNumber={post.likes.length}
+          followers={post.user.followedBy.length}
+          following={post.user.following.length}
+          bio={post.user.bio!}
         />
       ))}
     </div>

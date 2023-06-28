@@ -6,6 +6,7 @@ import { relativeDate } from "@/utils/utils";
 import { BiCommentDots } from "react-icons/bi";
 import LikeButton from "../likes/LikeButton";
 import RetweetButton from "../retweet/RetweetButton";
+import ProfileHoverCard from "../postCard/HoverCard";
 
 type Props = {
   title: string;
@@ -17,6 +18,9 @@ type Props = {
   image: string;
   commentNumber: number;
   likesNumber: number;
+  followers: number;
+  following: number;
+  bio: string;
 };
 export async function PostCard({
   title,
@@ -27,6 +31,9 @@ export async function PostCard({
   image,
   commentNumber,
   likesNumber,
+  followers,
+  following,
+  bio,
 }: Props) {
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
@@ -37,9 +44,18 @@ export async function PostCard({
         <div className="flex items-center justify-between gap-1 ">
           <div className="flex items-center gap-1">
             <Avatar image={image!} name={name!} />
-            <Link href={`/profile/${userId!}`} className="font-semibold ">
+            {/* <Link href={`/profile/${userId!}`} className="font-semibold ">
               {name!}
-            </Link>
+            </Link> */}
+            <ProfileHoverCard
+              href={`/profile/${userId!}`}
+              name={name!}
+              id={userId}
+              image={image!}
+              following={following}
+              followers={followers}
+              bio={bio}
+            />
           </div>
           <small className="flex items-center text-sm font-normal text-yellow-500 ">
             {relativeDate(date)}

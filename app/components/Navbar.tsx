@@ -25,7 +25,7 @@ async function Navbar({ href }: { href: string }) {
           <BiCameraHome className="text-3xl text-purple-500" />
         </Link>
       </div>
-      <div className="flex-none md:px-5">
+      <div className="flex-none md:hidden md:px-5">
         <AvatarSheet
           name={currentUser?.name!}
           image={currentUser?.image!}
