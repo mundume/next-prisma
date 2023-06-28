@@ -8,6 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "./sheetComponent";
 import { LuEdit } from "react-icons/lu";
 import SideBarLinks from "./SideBarLinks";
@@ -58,11 +59,14 @@ export default function AvatarSheet({
               </p>
             </div>
             <div className="py-5">
-              <SideBarLinks
-                href={`/profile/${id}`}
-                text="Profile"
-                icon={<RxAvatar className="text-2xl text-purple-500" />}
-              />
+              <SheetClose asChild>
+                <SideBarLinks
+                  href={`/profile/${id}`}
+                  text="Profile"
+                  icon={<RxAvatar className="text-2xl text-purple-500" />}
+                />
+              </SheetClose>
+
               <SideBarLinks
                 href={`/editprofile/${id}`}
                 text="Edit Profile"

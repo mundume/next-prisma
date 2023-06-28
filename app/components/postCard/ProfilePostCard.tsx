@@ -40,7 +40,7 @@ export default function ProfilePostCard({
           <div className="font-semibold ">{name!}</div>
         </div>
         <small className="flex items-center text-sm font-normal text-yellow-500 ">
-          {relativeDate(date)}
+          {relativeDate(date)}{" "}
         </small>
       </div>
       <div className="mx-12">
@@ -48,8 +48,7 @@ export default function ProfilePostCard({
       </div>
       <div className="flex items-center justify-between py-3 px-[50px]">
         <p className="flex items-center gap-1">
-          <MessageSquare />
-          {commentNumber}
+          <MessageSquare /> {commentNumber}{" "}
         </p>
 
         <p className="flex items-center gap-1">
@@ -60,7 +59,7 @@ export default function ProfilePostCard({
                 : "text-slate-200 text-2xl transition duration-200 ease-in-out"
             }
           />{" "}
-          {retweets}
+          {retweets}{" "}
         </p>
         <p className="flex items-center gap-1">
           <AiFillHeart
@@ -70,7 +69,7 @@ export default function ProfilePostCard({
                 : "text-slate-200 text-2xl transition duration-200 ease-in-out"
             }
           />{" "}
-          {likes.length}
+          {likes.length}{" "}
         </p>
       </div>
     </Link>

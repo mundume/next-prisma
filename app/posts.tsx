@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { PostCard } from "./components/posts/PostCard";
 
+export const revalidate = 60;
 export async function Posts() {
   const session = await getServerSession(authOptions);
   const post = await prisma.post.findMany({

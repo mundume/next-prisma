@@ -1,17 +1,15 @@
 "use client";
 
 import { Dialog, Transition } from "@headlessui/react";
-import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
-import Avatar from "./Avatar";
 
 type UserData = {
-  image: string;
   name: string;
-  email: string;
   bio: string;
   age: number;
+  image: string;
+  email: string;
   id: string;
   followers: number;
   following: number;
@@ -20,22 +18,52 @@ type UserData = {
 export default function MyModal({
   age,
   bio,
-  email,
   image,
   name,
+  email,
+  id,
   followers,
   following,
 }: UserData) {
-  const router = useRouter();
+  const { back } = useRouter();
   let [isOpen, setIsOpen] = useState(true);
 
   function closeModal() {
     setIsOpen(false);
-    router.back();
+    back();
   }
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  async function updateUser(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const body = {
+      name: formData.get("name") as string,
+      bio: formData.get("bio") as string,
+      age: formData.get("age") as string,
+      image: formData.get("image") as string,
+    };
+
+    const response = await fetch(`/api/editprofile`, {
+      method: "PUT",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .catch((err: Error) => {
+        throw new Error(err.message);
+      })
+      .finally(() => {
+        setIsOpen(false);
+        back();
+      });
+    await response.json();
+    back();
   }
 
   return (
@@ -65,48 +93,55 @@ export default function MyModal({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden transition-all transform bg-white shadow-xl rounded-2xl">
+                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                   <Dialog.Title
                     as="h3"
-                    className="flex items-center justify-start gap-1"
+                    className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    <Avatar image={image} name={name} />
-                    <p className="font-semibold">{name}</p>
+                    Payment successful
                   </Dialog.Title>
-                  <div className="pt-2">
-                    <p className="flex font-semibold text-yellow-500 ">
-                      {email}
-                    </p>
-                    <p className="flex pt-2 font-medium text-gray-500">
-                      {bio}.
-                    </p>
-                    <div className="flex items-center gap-2 py-2 font-medium text-purple-600">
-                      <div className="flex items-center gap-1">
-                        <p className="text-lg">{followers} </p>
-                        <p className="text-sm text-gray-500">followers</p>
-                      </div>
-                      <p className="flex items-center gap-1">
-                        <p className="text-lg">{following} </p>
-                        <p className="text-sm text-gray-500">following</p>
-                      </p>
-                    </div>
-                  </div>
+                  <div className="mt-2">
+                    <form
+                      className="flex flex-col gap-1 px-4 py-2"
+                      onSubmit={updateUser}
+                    >
+                      <label htmlFor="name">Name</label>
+                      <input
+                        type="text"
+                        name="name"
+                        defaultValue={name ?? ""}
+                        className="p-2 border-2 border-purple-500 rounded-md outline-none"
+                      />
+                      <label htmlFor="bio">Bio</label>
+                      <textarea
+                        name="bio"
+                        rows={5}
+                        cols={10}
+                        defaultValue={bio ?? ""}
+                        className="p-2 border-2 border-purple-500 rounded-md outline-none"
+                      ></textarea>
+                      <label htmlFor="age">Age</label>
+                      <input
+                        type="text"
+                        name="age"
+                        defaultValue={age ?? 0}
+                        className="p-2 border-2 border-purple-500 rounded-md outline-none"
+                      />
+                      <label htmlFor="image">Profile Image URL</label>
+                      <input
+                        type="text"
+                        name="image"
+                        defaultValue={image ?? ""}
+                        className="p-2 border-2 border-purple-500 rounded-md outline-none"
+                      />
 
-                  <div className="flex justify-around gap-4 mt-4 ">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-white bg-purple-400 border border-transparent rounded-md hover:bg-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 w-52"
-                      onClick={closeModal}
-                    >
-                      Go Back
-                    </button>
-                    <button
-                      type="button"
-                      className="inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-purple-400 bg-white border  rounded-md hover:bg-purple-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 border-purple-400 w-52 "
-                      onClick={() => window.location.reload()}
-                    >
-                      View Full Profile
-                    </button>
+                      <button
+                        type="submit"
+                        className="p-2 text-white bg-purple-500 rounded-md outline-none"
+                      >
+                        Save
+                      </button>
+                    </form>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

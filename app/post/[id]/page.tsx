@@ -16,10 +16,15 @@ type Props = {
 export async function generateMetadata(): Promise<Metadata> {
   const session = await getServerSession(authOptions);
   const user = await prisma.user.findUnique({
-    where: { email: session?.user?.email! },
+    where: {
+      email: session?.user?.email!,
+    },
   });
-  return { title: ` ${user?.name} BooBer Posts` };
+  return {
+    title: ` ${user?.name} BooBer Posts`,
+  };
 }
+
 export default async function page({ params }: Props) {
   const currentPost = await prisma.post.findUnique({
     where: {
@@ -51,12 +56,12 @@ export default async function page({ params }: Props) {
           name={currentPost?.user?.name!}
         />
         <Link href={`/profile/${currentPost?.user?.id}`} className="font-bold">
-          {currentPost?.user?.name!}
+          {currentPost?.user?.name!}{" "}
         </Link>
       </section>
       <section role="div" className="flex items-center py-2">
         <p className="px-1 font-medium text-purple-500 ">
-          {currentPost?.title}
+          {currentPost?.title}{" "}
         </p>
       </section>
       {comments.map((comment) => (
