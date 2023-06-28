@@ -5,14 +5,14 @@ import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 
 type UserData = {
-  name: string;
-  bio: string;
-  age: number;
-  image: string;
-  email: string;
-  id: string;
-  followers: number;
-  following: number;
+  name?: string;
+  bio?: string;
+  age?: number;
+  image?: string;
+  email?: string;
+  id?: string;
+  followers?: number;
+  following?: number;
 };
 
 export default function MyModal({
@@ -25,7 +25,7 @@ export default function MyModal({
   followers,
   following,
 }: UserData) {
-  const { back } = useRouter();
+  const { back, push } = useRouter();
   let [isOpen, setIsOpen] = useState(true);
 
   function closeModal() {
@@ -63,7 +63,6 @@ export default function MyModal({
         back();
       });
     await response.json();
-    back();
   }
 
   return (
