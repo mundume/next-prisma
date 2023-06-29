@@ -28,7 +28,7 @@ export default function AddPosts() {
     console.log(response);
   };
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center py-5">
       <div>
         <form action="" onSubmit={addPost} className="flex items-center gap-1">
           <input

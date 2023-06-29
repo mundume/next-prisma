@@ -32,7 +32,7 @@ export default function AddComment({ id }: { id: string }) {
   }
 
   return (
-    <form onSubmit={addComment} className="block">
+    <form onSubmit={addComment} className="block py-1">
       <input
         placeholder="Add a comment"
         name="comment"

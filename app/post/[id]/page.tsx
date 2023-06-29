@@ -2,11 +2,14 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Avatar from "@/app/components/Avatar";
 import Comments from "@/app/components/comment/Comments";
 import AddComment from "@/app/components/comment/add-comments";
+import PostDialog from "@/app/components/posts/PostDialog";
 import { prisma } from "@/lib/prisma";
 import { ArrowUpLeft } from "lucide-react";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+
+export const revalidate = 60;
 type Props = {
   params: {
     id: string;
@@ -31,9 +34,29 @@ export default async function page({ params }: Props) {
       id: params.id,
     },
     include: {
-      user: true,
-      likes: true,
-      retweets: true,
+      user: {
+        include: {
+          followedBy: true,
+          following: true,
+        },
+      },
+      likes: {
+        include: {
+          user: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+      retweets: {
+        include: {
+          user: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+
       Comment: {
         include: {
           user: true,
@@ -47,15 +70,7 @@ export default async function page({ params }: Props) {
       },
     },
   });
-  const comments = await prisma.comment.findMany({
-    where: {
-      postId: params.id,
-    },
-    include: {
-      user: true,
-      post: true,
-    },
-  });
+
   return (
     <section className="p-4 m-2 rounded">
       <Link href="/" className="flex items-center gap-1 py-3">
@@ -67,35 +82,42 @@ export default async function page({ params }: Props) {
           image={currentPost?.user?.image!}
           name={currentPost?.user?.name!}
         />
-        <Link href={`/profile/${currentPost?.user?.id}`} className="font-bold">
+        <Link
+          href={`/profile/${currentPost?.user?.id}`}
+          className="font-bold text-gray-700"
+        >
           {currentPost?.user?.name!}{" "}
         </Link>
       </section>
       <section role="div" className="flex flex-col py-2">
         <p className="font-medium text-purple-500 ">{currentPost?.title} </p>
         <div className="flex items-center justify-between py-2 text-sm text-gray-500">
-          <p>
-            <span className="text-base font-semibold text-gray-700">
-              {currentPost?.likes.length}{" "}
-            </span>
-            likes{" "}
-          </p>
-          <p>
-            <span className="text-base font-semibold text-gray-700 ">
-              {" "}
-              {currentPost?.retweets.length}{" "}
-            </span>
-            retweets{" "}
-          </p>
-          <p>
+          <div className="">
+            <PostDialog
+              dialogTrigerTitle={currentPost?.likes.length}
+              dialogTitle="Liked by"
+              title="Likes"
+              value={currentPost?.likes}
+            />
+          </div>
+          <div>
+            <PostDialog
+              dialogTitle="Retweeted by"
+              dialogTrigerTitle={currentPost?.retweets.length}
+              title="Retweets"
+              value={currentPost?.retweets}
+            />
+          </div>
+          <div>
             <span className="text-base font-semibold text-gray-700 ">
               {currentPost?.Comment.length}
             </span>{" "}
             comments
-          </p>
+          </div>
         </div>
       </section>
-      {comments.map((comment) => (
+      <AddComment id={params.id} />
+      {currentPost?.Comment?.map((comment) => (
         <Comments
           comment={comment.content!}
           key={comment.id}
@@ -106,7 +128,6 @@ export default async function page({ params }: Props) {
           userId={comment.user?.id!}
         />
       ))}
-      <AddComment id={params.id} />
     </section>
   );
 }

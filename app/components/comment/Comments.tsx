@@ -19,7 +19,7 @@ export default function Comments({ comment, name, image, date, userId }: User) {
         <div className="flex items-center gap-2 ">
           <Link
             href={`/profile/${userId}`}
-            className="font-bold text-gray-800 "
+            className="font-bold text-gray-700 "
           >
             {name}
           </Link>
@@ -28,7 +28,7 @@ export default function Comments({ comment, name, image, date, userId }: User) {
           </p>
         </div>
       </section>
-      <article className="">{comment}</article>
+      <article className="px-11">{comment}</article>
     </div>
   );
 }
