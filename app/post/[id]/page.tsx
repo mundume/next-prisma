@@ -33,6 +33,18 @@ export default async function page({ params }: Props) {
     include: {
       user: true,
       likes: true,
+      retweets: true,
+      Comment: {
+        include: {
+          user: true,
+        },
+        where: {
+          postId: params.id,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
     },
   });
   const comments = await prisma.comment.findMany({
@@ -59,10 +71,29 @@ export default async function page({ params }: Props) {
           {currentPost?.user?.name!}{" "}
         </Link>
       </section>
-      <section role="div" className="flex items-center py-2">
-        <p className="px-1 font-medium text-purple-500 ">
-          {currentPost?.title}{" "}
-        </p>
+      <section role="div" className="flex flex-col py-2">
+        <p className="font-medium text-purple-500 ">{currentPost?.title} </p>
+        <div className="flex items-center justify-between py-2 text-sm text-gray-500">
+          <p>
+            <span className="text-base font-semibold text-gray-700">
+              {currentPost?.likes.length}{" "}
+            </span>
+            likes{" "}
+          </p>
+          <p>
+            <span className="text-base font-semibold text-gray-700 ">
+              {" "}
+              {currentPost?.retweets.length}{" "}
+            </span>
+            retweets{" "}
+          </p>
+          <p>
+            <span className="text-base font-semibold text-gray-700 ">
+              {currentPost?.Comment.length}
+            </span>{" "}
+            comments
+          </p>
+        </div>
       </section>
       {comments.map((comment) => (
         <Comments

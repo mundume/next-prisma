@@ -64,6 +64,7 @@ export async function PostCard({
         <div className="mx-12">
           <Link
             href={`/post/${id}`}
+            prefetch={true}
             className="px-1 font-medium text-purple-600"
           >
             {title}

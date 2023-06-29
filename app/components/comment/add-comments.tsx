@@ -34,14 +34,14 @@ export default function AddComment({ id }: { id: string }) {
   return (
     <form onSubmit={addComment} className="block">
       <input
-        placeholder="add a comment"
+        placeholder="Add a comment"
         name="comment"
-        className="w-full max-w-xs textarea textarea-bordered textarea-lg"
+        className="w-full textarea textarea-bordered textarea-lg"
         ref={clearInput}
       />
       <button
         type="submit"
-        className="block px-4 py-3 my-4 font-semibold text-white bg-purple-600 border-none rounded-md outline-none hover:bg-purple-400 active:bg-purple-500"
+        className="block px-4 py-2 my-4 font-semibold text-white bg-purple-600 border-none rounded-md outline-none hover:bg-purple-400 active:bg-purple-500"
       >
         Comment
       </button>
