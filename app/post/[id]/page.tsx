@@ -42,7 +42,12 @@ export default async function page({ params }: Props) {
       },
       likes: {
         include: {
-          user: true,
+          user: {
+            include: {
+              followedBy: true,
+              following: true,
+            },
+          },
         },
         orderBy: {
           createdAt: "desc",
@@ -50,7 +55,12 @@ export default async function page({ params }: Props) {
       },
       retweets: {
         include: {
-          user: true,
+          user: {
+            include: {
+              followedBy: true,
+              following: true,
+            },
+          },
         },
         orderBy: {
           createdAt: "desc",
@@ -82,6 +92,7 @@ export default async function page({ params }: Props) {
           image={currentPost?.user?.image!}
           name={currentPost?.user?.name!}
         />
+
         <Link
           href={`/profile/${currentPost?.user?.id}`}
           className="font-bold text-gray-700"

@@ -7,13 +7,13 @@ import Link from "next/link";
 import Avatar from "../Avatar";
 
 type Props = {
-  id: string;
-  href: string;
-  name: string;
-  image: string;
-  following: number;
-  followers: number;
-  bio: string;
+  id?: string;
+  href?: string;
+  name?: string;
+  image?: string;
+  following?: number;
+  followers?: number;
+  bio?: string;
 };
 export default function ProfileHoverCard({
   href,
@@ -26,13 +26,17 @@ export default function ProfileHoverCard({
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Link href={href} prefetch={true} className="font-semibold ">
+        <Link
+          href={href ? href : "#"}
+          prefetch={true}
+          className="font-semibold "
+        >
           {name}
         </Link>
       </HoverCardTrigger>
       <HoverCardContent>
         <div className="flex flex-col gap-1 font-semibold">
-          <Avatar image={image} name={name} />
+          <Avatar image={image!} name={name!} />
           {name}
         </div>
         <div className="flex gap-2 py-4 text-purple-500">
@@ -45,7 +49,7 @@ export default function ProfileHoverCard({
           <div className="flex items-center justify-between gap-1">
             <div className="flex items-center gap-1">
               <p className="text-lg">{following} </p>
-              <p className="text-sm text-gray-500">Followers</p>
+              <p className="text-sm text-gray-500">Following</p>
             </div>
           </div>
         </div>

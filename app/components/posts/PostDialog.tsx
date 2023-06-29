@@ -6,9 +6,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Avatar from "../Avatar";
 import ProfileHoverCard from "../postCard/HoverCard";
 import { Likes, User, Retweets } from "@prisma/client";
+import Avatar from "../Avatar";
 
 type LikesRts = Likes[] | Retweets[];
 type Props = {
@@ -43,11 +43,18 @@ export default function PostDialog({
               key={item.id}
               className="flex items-center gap-1 font-semibold text-gray-700"
             >
-              <Avatar image={item?.user?.image!} name={item?.user?.name!} />
-
-              {item.user.name}
+              <Avatar image={item.user.image!} name={item.user.name!} />
+              <ProfileHoverCard
+                bio={item.user.bio}
+                name={item.user.name}
+                image={item.user.image}
+                followers={item.user.followedBy.length}
+                following={item.user.following.length}
+                href={`/profile/${item.user.id}`}
+              />
             </DialogDescription>
           ))}
+          {}
         </DialogHeader>
       </DialogContent>
     </Dialog>
