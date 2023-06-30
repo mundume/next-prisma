@@ -14,7 +14,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const user = await prisma.user.findUnique({ where: { id: params.id } });
-  return { title: `User profile of ${user?.name}` };
+  return { title: `${user?.name} profile` };
 }
 
 export default async function page({ params }: Props) {

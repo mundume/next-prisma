@@ -1,6 +1,7 @@
 import AuthProvider from "./AuthProvider";
 import Navbar from "./components/Navbar";
 import SideBar from "./components/sidebar/SideBar";
+import WhoToFollow from "./components/whoToFollow";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -32,6 +33,10 @@ export default function RootLayout({
             <div className="md:col-span-4">
               {children}
               {modal}
+            </div>
+            <div className="hidden px-2 py-20 border-r md:block md:col-span-2">
+              {/* @ts-ignore */}
+              <WhoToFollow />
             </div>
           </div>
         </body>

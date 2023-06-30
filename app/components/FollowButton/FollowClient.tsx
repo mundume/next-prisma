@@ -56,7 +56,7 @@ export default function FollowClient({
       <button
         onClick={unfollow}
         className={clsx(
-          "inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-purple-400 bg-white border  rounded-md hover:bg-purple-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
+          "inline-flex justify-center px-3.5 py-2 text-sm font-semibold text-purple-400 bg-white border  rounded-md hover:bg-purple-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
         )}
       >
         {!isMutating ? "following" : "..."}
