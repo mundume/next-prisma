@@ -32,13 +32,15 @@ export default function ProfileHoverCard({
           {name}
         </Link>
       </HoverCardTrigger>
-      <HoverCardContent className="flex items-center justify-between">
-        <div className="flex flex-col gap-1 font-semibold">
-          <Avatar image={image!} name={name!} />
-          {name}
+      <HoverCardContent>
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1 font-semibold">
+            <Avatar image={image!} name={name!} />
+            {name}
+          </div>
+          {/* @ts-ignore */}
+          <FollowButton targetUserId={id} />
         </div>
-        {/* @ts-ignore */}
-        <FollowButton targetUserId={id} />
         <div className="flex gap-2 py-4 text-purple-500">
           <div className="flex items-center justify-between gap-1">
             <div className="flex items-center gap-1">
