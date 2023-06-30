@@ -87,7 +87,7 @@ export default async function page({ params }: Props) {
         <ArrowUpLeft />
         <p>Back</p>
       </Link>
-      <section role="div" className="flex items-center gap-1">
+      <section role="div" className="flex items-center gap-1 ">
         <Avatar
           image={currentPost?.user?.image!}
           name={currentPost?.user?.name!}
@@ -100,7 +100,7 @@ export default async function page({ params }: Props) {
           {currentPost?.user?.name!}{" "}
         </Link>
       </section>
-      <section role="div" className="flex flex-col py-2">
+      <section role="div" className="flex flex-col py-2 ">
         <p className="font-medium text-purple-500 ">{currentPost?.title} </p>
         <div className="flex items-center justify-between py-2 text-sm text-gray-500">
           <div className="">

@@ -57,7 +57,7 @@ export default function FollowClient({
         onClick={unfollow}
         className={clsx("bg-yellow-400 text-white px-3 py-2 rounded-md mx-2 ")}
       >
-        {!isMutating ? "Unfollow" : "..."}
+        {!isMutating ? "following" : "..."}
       </button>
     );
   } else
@@ -66,7 +66,7 @@ export default function FollowClient({
         onClick={follow}
         className={clsx("bg-yellow-400 text-white rounded-md px-1 py-2")}
       >
-        {!isMutating ? "Follow" : "..."}{" "}
+        {!isMutating ? "follow" : "..."}{" "}
       </button>
     );
 }

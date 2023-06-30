@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/hovercard";
 import Link from "next/link";
 import Avatar from "../Avatar";
+import FollowButton from "../FollowButton/FollowButton";
 
 type Props = {
   id?: string;
@@ -22,23 +23,22 @@ export default function ProfileHoverCard({
   followers,
   following,
   bio,
+  id,
 }: Props) {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Link
-          href={href ? href : "#"}
-          prefetch={true}
-          className="font-semibold "
-        >
+        <Link href={href!} prefetch={true} className="font-semibold ">
           {name}
         </Link>
       </HoverCardTrigger>
-      <HoverCardContent>
+      <HoverCardContent className="flex items-center justify-between">
         <div className="flex flex-col gap-1 font-semibold">
           <Avatar image={image!} name={name!} />
           {name}
         </div>
+        {/* @ts-ignore */}
+        <FollowButton targetUserId={id} />
         <div className="flex gap-2 py-4 text-purple-500">
           <div className="flex items-center justify-between gap-1">
             <div className="flex items-center gap-1">

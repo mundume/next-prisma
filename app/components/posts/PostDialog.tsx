@@ -51,6 +51,7 @@ export default function PostDialog({
                 followers={item.user.followedBy.length}
                 following={item.user.following.length}
                 href={`/profile/${item.user.id}`}
+                id={item.user.id}
               />
             </DialogDescription>
           ))}
