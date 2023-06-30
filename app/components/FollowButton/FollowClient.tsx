@@ -67,7 +67,7 @@ export default function FollowClient({
       <button
         onClick={follow}
         className={clsx(
-          "inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-purple-400 bg-purple-500 border  rounded-md hover:bg-white hover:text-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
+          "inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-white bg-purple-400 border  rounded-md hover:bg-white hover:text-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
         )}
       >
         {!isMutating ? "follow" : "..."}{" "}
