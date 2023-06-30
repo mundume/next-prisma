@@ -18,6 +18,7 @@ export async function Posts() {
 
       Comment: true,
       likes: true,
+      retweets: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -40,6 +41,7 @@ export async function Posts() {
           image={post.user.image!}
           userId={post.user.id}
           commentNumber={post.Comment.length}
+          retweetsNumber={post.retweets.length}
           likesNumber={post.likes.length}
           followers={post.user.followedBy.length}
           following={post.user.following.length}

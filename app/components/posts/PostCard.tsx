@@ -1,6 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 import Avatar from "../Avatar";
 import { relativeDate } from "@/utils/utils";
 import { BiCommentDots } from "react-icons/bi";
@@ -21,8 +19,9 @@ type Props = {
   followers: number;
   following: number;
   bio: string;
+  retweetsNumber: number;
 };
-export async function PostCard({
+export function PostCard({
   title,
   id,
   date,
@@ -34,10 +33,8 @@ export async function PostCard({
   followers,
   following,
   bio,
+  retweetsNumber,
 }: Props) {
-  const session = await getServerSession(authOptions);
-  const email = session?.user?.email;
-
   return (
     <div className="text-gray-600">
       <div className="flex flex-col justify-around p-4 mx-2 my-3 min-h-[250px] border rounded ">
@@ -76,9 +73,10 @@ export async function PostCard({
             {commentNumber}
           </Link>
 
-          <p className="flex items-center gap-1">
+          <p className="flex items-center gap-1 text-gray-600">
             {/* @ts-ignore */}
             <RetweetButton className="text-2xl text-yellow-400" postId={id} />
+            {retweetsNumber}
           </p>
           <p className="flex items-center gap-1">
             {/* @ts-ignore */}

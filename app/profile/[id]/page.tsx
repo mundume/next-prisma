@@ -49,8 +49,6 @@ export default async function page({ params }: Props) {
       {/* @ts-ignore */}
       <UserCard userData={userData} />
       <div className="p-2">
-        {/* @ts-ignore */}
-        <FollowButton targetUserId={params.id} />
         <section className="flex items-center justify-between gap-2 py-4 font-medium text-purple-600">
           <div className="flex items-center gap-1 px-2">
             <div className="flex items-center gap-1">
@@ -65,13 +63,16 @@ export default async function page({ params }: Props) {
               </div>
             </div>
           </div>
-          {userData?.email === currentEmail && (
+          {userData?.email === currentEmail ? (
             <Link
               href={`/editprofile/${params.id}`}
               className="inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-purple-400 bg-white border  rounded-md hover:bg-purple-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
             >
               Edit Profile
             </Link>
+          ) : (
+            // @ts-ignore
+            <FollowButton targetUserId={params.id} />
           )}
         </section>
       </div>
