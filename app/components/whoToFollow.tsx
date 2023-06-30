@@ -26,15 +26,17 @@ export default async function WhoToFollow() {
         },
       },
     },
+    include: {
+      followedBy: true,
+      following: true,
+    },
   });
 
   return (
     <div className="fixed">
-      <h1 className="px-8 pb-4 text-xl font-medium text-gray-500">
-        Who to follow
-      </h1>
-      <div className=" text-gray-600 rounded-lg bg-slate-100 lg:w-[300px] md:w-[200px] w-full py-8 ">
-        <div className="flex flex-col items-center gap-4 px-4">
+      <h1 className="px-4 text-4xl font-medium text-gray-600">Who to follow</h1>
+      <div className=" text-gray-600 rounded-lg bg-slate-100 lg:w-[300px] md:bg-white w-full py-8 ">
+        <div className="flex flex-col items-stretch gap-4 px-4">
           {usersNotFollowing.map((user) => {
             if (user.id !== userId) {
               return (
@@ -45,6 +47,9 @@ export default async function WhoToFollow() {
                   image={user.image!}
                   targetUserId={user.id}
                   key={user.id}
+                  followers={user.followedBy.length}
+                  following={user.following.length}
+                  bio={user.bio!}
                 />
               );
             }
