@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../../../app/api/auth/[...nextauth]/route";
 import Avatar from "./Avatar";
 import FollowButton from "./FollowButton/FollowButton";
 import WhoToFolllowComponent from "./WhoToFolllowComponent";

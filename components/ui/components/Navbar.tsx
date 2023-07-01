@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import React from "react";
 import AvatarSheet from "./sidebar/AvatarSheet";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../../../app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { BiCameraHome } from "react-icons/bi";

@@ -1,4 +1,4 @@
-import ProfilePostCard from "@/app/components/postCard/ProfilePostCard";
+import ProfilePostCard from "@/components/ui/components/postCard/ProfilePostCard";
 import { prisma } from "@/lib/prisma";
 
 type Props = {

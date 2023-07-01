@@ -1,7 +1,7 @@
 import AuthProvider from "./AuthProvider";
-import Navbar from "./components/Navbar";
-import SideBar from "./components/sidebar/SideBar";
-import WhoToFollow from "./components/whoToFollow";
+import Navbar from "../components/ui/components/Navbar";
+import SideBar from "../components/ui/components/sidebar/SideBar";
+import WhoToFollow from "../components/ui/components/whoToFollow";
 import "./globals.css";
 import { Inter } from "next/font/google";
 

@@ -1,5 +1,5 @@
 "use client";
-import MyTabs from "@/app/components/Tabs";
+import MyTabs from "@/components/ui/components/Tabs";
 
 type Props = {
   children: React.ReactNode;

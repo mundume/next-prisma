@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import UserCard from "../components/UserCard";
+import UserCard from "../../components/ui/components/UserCard";
 import Link from "next/link";
 
 export default async function page() {

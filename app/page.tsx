@@ -6,8 +6,8 @@ import { prisma } from "@/lib/prisma";
 import clsx from "clsx";
 import AddPosts from "./post/addpost";
 import { Posts } from "./posts";
-import Avatar from "./components/Avatar";
-import Navbar from "./components/Navbar";
+import Avatar from "../components/ui/components/Avatar";
+import Navbar from "../components/ui/components/Navbar";
 
 export const revalidate = 60;
 

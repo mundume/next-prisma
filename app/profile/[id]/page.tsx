@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import FollowButton from "@/app/components/FollowButton/FollowButton";
-import UserCard from "@/app/components/UserCard";
+import FollowButton from "@/components/ui/components/FollowButton/FollowButton";
+import UserCard from "@/components/ui/components/UserCard";
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";

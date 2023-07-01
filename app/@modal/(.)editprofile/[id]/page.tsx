@@ -1,4 +1,4 @@
-import MyDialog from "@/app/components/Dialog";
+import MyDialog from "@/components/ui/components/Dialog";
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 
