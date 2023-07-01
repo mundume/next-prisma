@@ -74,12 +74,12 @@ export function PostCard({
           </Link>
 
           <p className="flex items-center gap-1 text-gray-600">
-            {/* @ts-ignore */}
+            {/* @ts-ignore server component */}
             <RetweetButton className="text-2xl text-yellow-400" postId={id} />
             {retweetsNumber}
           </p>
           <p className="flex items-center gap-1">
-            {/* @ts-ignore */}
+            {/* @ts-ignore server component */}
             <LikeButton postId={id} />
             {likesNumber}
           </p>

@@ -1,13 +1,18 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Avatar from "@/app/components/Avatar";
+import BackLink from "@/app/components/BackLink";
+import BookMarkButton from "@/app/components/bookmarkButton/bookMarkButton";
 import Comments from "@/app/components/comment/Comments";
 import AddComment from "@/app/components/comment/add-comments";
+import LikeButton from "@/app/components/likes/LikeButton";
 import PostDialog from "@/app/components/posts/PostDialog";
+import RetweetButton from "@/app/components/retweet/RetweetButton";
 import { prisma } from "@/lib/prisma";
 import { ArrowUpLeft } from "lucide-react";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { BsFillBookmarkFill } from "react-icons/bs";
 
 export const revalidate = 60;
 type Props = {
@@ -78,15 +83,17 @@ export default async function page({ params }: Props) {
           createdAt: "desc",
         },
       },
+      Bookmark: {
+        include: {
+          user: true,
+        },
+      },
     },
   });
 
   return (
     <section className="p-4 m-2 rounded">
-      <Link href="/" className="flex items-center gap-1 py-3">
-        <ArrowUpLeft />
-        <p>Back</p>
-      </Link>
+      <BackLink />
       <section role="div" className="flex items-center gap-1 ">
         <Avatar
           image={currentPost?.user?.image!}
@@ -103,27 +110,57 @@ export default async function page({ params }: Props) {
       <section role="div" className="flex flex-col py-2 ">
         <p className="font-medium text-purple-500 ">{currentPost?.title} </p>
         <div className="flex items-center justify-between py-2 text-sm text-gray-500">
+          {currentPost?.likes.length !== 0 && (
+            <div className="">
+              <PostDialog
+                dialogTrigerTitle={currentPost?.likes.length}
+                dialogTitle="Liked by"
+                title={currentPost?.likes.length! > 1 ? "Likes" : "Like"}
+                value={currentPost?.likes}
+              />
+            </div>
+          )}
+          {currentPost?.retweets.length !== 0 && (
+            <div>
+              <PostDialog
+                dialogTitle="Retweeted by"
+                dialogTrigerTitle={currentPost?.retweets.length}
+                title={
+                  currentPost?.retweets.length! > 1 ? "Retweets" : "Retweet"
+                }
+                value={currentPost?.retweets}
+              />
+            </div>
+          )}
+          {currentPost?.Comment.length !== 0 && (
+            <div>
+              <span className="text-base font-semibold text-gray-700 ">
+                {currentPost?.Comment.length}
+              </span>{" "}
+              {currentPost?.Comment.length! > 1 ? "comments" : "comment"}
+            </div>
+          )}
+          {currentPost?.Bookmark.length !== 0 && (
+            <div>
+              <span className="text-base font-semibold text-gray-700 ">
+                {currentPost?.Bookmark.length}
+              </span>{" "}
+              {currentPost?.Bookmark.length! > 1 ? "bookmarks" : "bookmark"}
+            </div>
+          )}
+        </div>
+        <div className="flex items-center justify-between px-2 py-4 text-sm text-gray-500 border">
           <div className="">
-            <PostDialog
-              dialogTrigerTitle={currentPost?.likes.length}
-              dialogTitle="Liked by"
-              title="Likes"
-              value={currentPost?.likes}
-            />
+            {/* @ts-ignore server component */}
+            <LikeButton postId={currentPost?.id!} />
           </div>
           <div>
-            <PostDialog
-              dialogTitle="Retweeted by"
-              dialogTrigerTitle={currentPost?.retweets.length}
-              title="Retweets"
-              value={currentPost?.retweets}
-            />
+            {/* @ts-ignore server component */}
+            <RetweetButton postId={currentPost?.id!} />
           </div>
           <div>
-            <span className="text-base font-semibold text-gray-700 ">
-              {currentPost?.Comment.length}
-            </span>{" "}
-            comments
+            {/* @ts-ignore server component */}
+            <BookMarkButton postId={currentPost?.id!} />
           </div>
         </div>
       </section>

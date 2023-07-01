@@ -25,7 +25,7 @@ export default function RootLayout({
         <body className={inter.className}>
           {/* @ts-ignore */}
 
-          <div className="min-h-screen grid-flow-col md:grid md:grid-cols-8 ">
+          <div className="min-h-screen grid-flow-col md:grid md:grid-cols-9 ">
             <div className="hidden p-2 border-r md:block md:col-span-2">
               {/* @ts-ignore */}
               <SideBar />
@@ -34,7 +34,7 @@ export default function RootLayout({
               {children}
               {modal}
             </div>
-            <div className="hidden px-2 py-20 border-r md:block md:col-span-2">
+            <div className="hidden px-4 py-10 border-r lg:px-10 md:block md:col-span-3">
               {/* @ts-ignore */}
               <WhoToFollow />
             </div>

@@ -16,7 +16,7 @@ export default async function SideBar() {
     })
     .then((user) => user?.id);
   return (
-    <div className="fixed px-16 ">
+    <div className="fixed lg:px-16 md:px-4 sm:px-4">
       <SideBarLinks
         href="/"
         text="Home"

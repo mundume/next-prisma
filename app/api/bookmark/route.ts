@@ -6,22 +6,22 @@ export async function POST(req: NextRequest) {
   const { userId, postId } = data;
   console.log(data);
 
-  const likes = await prisma.retweets.create({
+  const bookmark = await prisma.bookmark.create({
     data: {
       authorId: userId,
       postId: postId,
     },
   });
-  return NextResponse.json(likes);
+  return NextResponse.json(bookmark);
 }
 
 export async function DELETE(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id")!;
-  const unlike = await prisma.retweets.delete({
+  const bookmark = await prisma.bookmark.delete({
     where: {
       id,
     },
   });
-  return NextResponse.json(unlike);
+  return NextResponse.json(bookmark);
 }
