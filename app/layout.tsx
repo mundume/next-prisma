@@ -1,7 +1,6 @@
 import AuthProvider from "./AuthProvider";
-import Navbar from "../components/ui/components/Navbar";
-import SideBar from "../components/ui/components/sidebar/SideBar";
-import WhoToFollow from "../components/ui/components/whoToFollow";
+import SideBar from "@/components/ui/components/sidebar/SideBar";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -30,14 +29,14 @@ export default function RootLayout({
               {/* @ts-ignore */}
               <SideBar />
             </div>
-            <div className="md:col-span-4">
+            <div className="md:col-span-7">
               {children}
               {modal}
             </div>
-            <div className="hidden px-4 py-10 border-r lg:px-10 md:block md:col-span-3">
-              {/* @ts-ignore */}
+            {/* <div className="hidden px-4 py-10 border-r lg:px-10 md:block md:col-span-3">
+             
               <WhoToFollow />
-            </div>
+            </div> */}
           </div>
         </body>
       </html>

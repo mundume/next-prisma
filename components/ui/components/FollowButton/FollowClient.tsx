@@ -51,6 +51,16 @@ export default function FollowClient({
       throw new Error(err.message);
     });
     console.log(response);
+    setIsFetching(false);
+    startTransition(() => {
+      // Refresh the current route:
+      // - Makes a new request to the server for the route
+      // - Re-fetches data requests and re-renders Server Components
+      // - Sends the updated React Server Component payload to the client
+      // - The client merges the payload without losing unaffected
+      //   client-side React state or browser state
+      router.refresh();
+    });
   };
   if (userId === targetUserId) return null;
   if (isFollowing) {
@@ -61,7 +71,7 @@ export default function FollowClient({
           "inline-flex justify-center px-3.5 py-2 text-sm font-semibold text-purple-400 bg-white border  rounded-md hover:bg-purple-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
         )}
       >
-        {!isMutating ? "following" : "follow"}
+        {!isMutating ? "following" : "..."}
       </button>
     );
   } else
@@ -72,7 +82,7 @@ export default function FollowClient({
           "inline-flex justify-center px-4 py-2.5 text-sm font-semibold text-white bg-purple-400 border  rounded-md hover:bg-white hover:text-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-200 focus-visible:ring-offset-2 border-purple-400 mr-4"
         )}
       >
-        {!isMutating ? "follow" : "following"}
+        {!isMutating ? "follow" : "..."}
       </button>
     );
 }

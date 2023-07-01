@@ -1,13 +1,13 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 import clsx from "clsx";
-import AddPosts from "./post/addpost";
-import { Posts } from "./posts";
-import Avatar from "../components/ui/components/Avatar";
-import Navbar from "../components/ui/components/Navbar";
+import AddPosts from "../(postdirectory)/post/addpost";
+import { Posts } from "@/components/ui/components/posts/Posts";
+import Avatar from "@/components/ui/components/Avatar";
+import Navbar from "@/components/ui/components/Navbar";
 
 export const revalidate = 60;
 
@@ -25,19 +25,18 @@ export default async function Home() {
         // @ts-ignore server component cant ne rendered as jsx
         <Navbar href="/" />
       )}
+
       <div className="p-2">
         {session ? (
           <>
-            {/* @ts-ignore */}
-
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center ">
               <div className="flex items-center gap-1">
                 <Avatar image={user?.image!} name={user?.name!} />
 
                 <AddPosts />
               </div>
               <div className="flex items-center ">
-                {/* @ts-ignore */}
+                {/* @ts-ignore server component cant ne rendered as jsx */}
                 <Posts />
               </div>
             </div>

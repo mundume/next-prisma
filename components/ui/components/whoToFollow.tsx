@@ -1,9 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../app/api/auth/[...nextauth]/route";
-import Avatar from "./Avatar";
-import FollowButton from "./FollowButton/FollowButton";
-import WhoToFolllowComponent from "./WhoToFolllowComponent";
+import SideRecommended from "./SideRecommended";
 
 export default async function WhoToFollow() {
   const session = await getServerSession(authOptions);
@@ -33,31 +31,28 @@ export default async function WhoToFollow() {
   });
 
   return (
-    <div className="fixed">
-      <h1 className="px-10 text-xl font-medium text-gray-600 md:text-3xl">
+    <div className="">
+      <h1 className="block py-4 m-auto font-semibold text-center text-gray-700 lg:text-2xl ">
         Who to follow
       </h1>
-      <div className=" text-gray-600 rounded-lg bg-slate-100 lg:w-[300px] md:bg-white w-full py-3 ">
-        <div className="flex flex-col items-stretch gap-4 px-4">
-          {usersNotFollowing.map((user) => {
-            if (user.id !== userId) {
-              return (
-                // @ts-ignore server component
 
-                <WhoToFolllowComponent
-                  name={user.name!}
-                  image={user.image!}
-                  targetUserId={user.id}
-                  key={user.id}
-                  followers={user.followedBy.length}
-                  following={user.following.length}
-                  bio={user.bio!}
-                />
-              );
-            }
-          })}
-        </div>
-      </div>
+      {usersNotFollowing.map((user) => {
+        if (user.id !== userId) {
+          return (
+            // @ts-ignore server component
+
+            <SideRecommended
+              name={user.name!}
+              image={user.image!}
+              targetUserId={user.id}
+              key={user.id}
+              followers={user.followedBy.length}
+              following={user.following.length}
+              bio={user.bio!}
+            />
+          );
+        }
+      })}
     </div>
   );
 }

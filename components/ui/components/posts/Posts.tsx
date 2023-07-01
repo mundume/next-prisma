@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { PostCard } from "../components/ui/components/posts/PostCard";
+import { PostCard } from "@/components/ui/components/posts/PostCard";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export const revalidate = 60;
 export async function Posts() {
   const session = await getServerSession(authOptions);
   const post = await prisma.post.findMany({

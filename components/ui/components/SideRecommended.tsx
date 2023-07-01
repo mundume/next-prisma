@@ -10,7 +10,7 @@ type Props = {
   bio: string;
 };
 
-export default function WhoToFolllowComponent({
+export default function SideRecommended({
   targetUserId,
   image,
   name,
@@ -19,7 +19,7 @@ export default function WhoToFolllowComponent({
   bio,
 }: Props) {
   return (
-    <div className="px-2 py-4 border rounded-md">
+    <div className="px-2 py-4 mb-2 border rounded-md">
       <div className="flex items-center justify-between ">
         <div className="flex flex-col gap-1 font-semibold">
           <Avatar image={image!} name={name!} />

@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { User } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { useRouter } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 export default function EditData({ user }: { user: User }) {
   async function updateUserData(data: FormData) {
