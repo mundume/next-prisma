@@ -6,10 +6,12 @@ import SideRecommended from "./SideRecommended";
 export default async function WhoToFollow() {
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email;
+  if (currentEmail === null || currentEmail === undefined) return;
+
   const userId = await prisma.user
     .findUnique({
       where: {
-        email: currentEmail!,
+        email: currentEmail,
       },
     })
     .then((user) => user?.id!);
