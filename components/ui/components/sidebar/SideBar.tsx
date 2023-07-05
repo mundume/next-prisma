@@ -16,22 +16,26 @@ export default async function SideBar() {
     })
     .then((user) => user?.id);
   return (
-    <div className="fixed lg:px-16 md:px-4 sm:px-4">
-      <SideBarLinks
-        href="/"
-        text="Home"
-        icon={<BiHomeCircle className="text-2xl text-purple-500" />}
-      />
-      <SideBarLinks
-        href={`/profile/${userId}`}
-        text="Profile"
-        icon={<RxAvatar className="text-2xl text-purple-500" />}
-      />
-      <SideBarLinks
-        href={`/editprofile/${userId}`}
-        text="Edit Profile"
-        icon={<LuEdit className="text-2xl text-purple-500" />}
-      />
-    </div>
+    session && (
+      <>
+        <div className="fixed lg:px-16 md:px-4 sm:px-4">
+          <SideBarLinks
+            href="/"
+            text="Home"
+            icon={<BiHomeCircle className="text-2xl text-purple-500" />}
+          />
+          <SideBarLinks
+            href={`/profile/${userId}`}
+            text="Profile"
+            icon={<RxAvatar className="text-2xl text-purple-500" />}
+          />
+          <SideBarLinks
+            href={`/editprofile/${userId}`}
+            text="Edit Profile"
+            icon={<LuEdit className="text-2xl text-purple-500" />}
+          />
+        </div>
+      </>
+    )
   );
 }

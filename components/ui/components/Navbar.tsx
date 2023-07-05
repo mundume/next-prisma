@@ -19,24 +19,26 @@ async function Navbar({ href }: { href: string }) {
     },
   });
   return (
-    <div className="px-2 navbar bg-base-100 md:px-4">
-      <div className="flex-1">
-        <Link href={href} className="text-xl normal-case">
-          <BiCameraHome className="text-3xl text-purple-500" />
-        </Link>
+    session && (
+      <div className="px-2 navbar bg-base-100 md:px-4">
+        <div className="flex-1">
+          <Link href={href} className="text-xl normal-case">
+            <BiCameraHome className="text-3xl text-purple-500" />
+          </Link>
+        </div>
+        <div className="flex-none md:hidden md:px-5">
+          <AvatarSheet
+            name={currentUser?.name!}
+            image={currentUser?.image!}
+            followers={currentUser?.followedBy.length}
+            following={currentUser?.following.length!}
+            email={currentUser?.email!}
+            bio={currentUser?.bio!}
+            id={currentUser?.id!}
+          />
+        </div>
       </div>
-      <div className="flex-none md:hidden md:px-5">
-        <AvatarSheet
-          name={currentUser?.name!}
-          image={currentUser?.image!}
-          followers={currentUser?.followedBy.length}
-          following={currentUser?.following.length!}
-          email={currentUser?.email!}
-          bio={currentUser?.bio!}
-          id={currentUser?.id!}
-        />
-      </div>
-    </div>
+    )
   );
 }
 
