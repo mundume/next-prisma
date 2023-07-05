@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   const data = await req.json();
   const { userId, postId } = data;
   console.log(data);
-
+  //fix stuff
   const likes = await prisma.likes.create({
     data: {
       authorId: userId,
