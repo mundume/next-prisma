@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../app/api/auth/[...nextauth]/route";
 import SideRecommended from "./SideRecommended";
+import { authOptions } from "@/utils/auth";
 
 export default async function WhoToFollow() {
   const session = await getServerSession(authOptions);

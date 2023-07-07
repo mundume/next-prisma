@@ -1,4 +1,3 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Avatar from "@/components/ui/components/Avatar";
 import BackLink from "@/components/ui/components/BackLink";
 import SideRecommended from "@/components/ui/components/SideRecommended";
@@ -9,6 +8,7 @@ import LikeButton from "@/components/ui/components/likes/LikeButton";
 import PostDialog from "@/components/ui/components/posts/PostDialog";
 import RetweetButton from "@/components/ui/components/retweet/RetweetButton";
 import { prisma } from "@/lib/prisma";
+import { authOptions } from "@/utils/auth";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";

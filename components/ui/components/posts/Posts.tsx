@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { PostCard } from "@/components/ui/components/posts/PostCard";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/auth";
 
 export async function Posts() {
   const session = await getServerSession(authOptions);
@@ -25,9 +25,6 @@ export async function Posts() {
     },
   });
 
-  if (!session) {
-    redirect("/api/auth/signin");
-  }
   return (
     <div className="">
       {post.map((post) => (

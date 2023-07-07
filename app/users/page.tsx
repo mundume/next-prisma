@@ -1,14 +1,14 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import UserCard from "../../components/ui/components/UserCard";
 import Link from "next/link";
+import { authOptions } from "@/utils/auth";
 
 export default async function page() {
   const session = await getServerSession(authOptions);
   if (!session) {
-    redirect("/api/auth/signin");
+    redirect("/signin");
   }
   const users = await prisma.user.findMany();
   return (

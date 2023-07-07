@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import RetweetClient from "./RetweetClient";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/auth";
 
 type Props = {
   postId: string;
@@ -9,10 +9,11 @@ type Props = {
 export default async function RetweetButton({ postId }: Props) {
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email;
+  if (currentEmail === null || currentEmail === undefined) return;
   const currentUserId = await prisma.user
     .findUnique({
       where: {
-        email: currentEmail!,
+        email: currentEmail,
       },
     })
     .then((user) => user?.id);

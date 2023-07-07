@@ -14,9 +14,11 @@ export const metadata = {
 export default function RootLayout({
   children,
   modal,
+  authModal,
 }: {
   children: React.ReactNode;
   modal: React.ReactNode;
+  authModal: React.ReactNode;
 }) {
   return (
     <AuthProvider>
@@ -32,6 +34,7 @@ export default function RootLayout({
             <div className="md:col-span-7">
               {children}
               {modal}
+              {authModal}
             </div>
             {/* <div className="hidden px-4 py-10 border-r lg:px-10 md:block md:col-span-3">
              

@@ -12,6 +12,8 @@ import {
 } from "./sheetComponent";
 import { LuEdit } from "react-icons/lu";
 import SideBarLinks from "./SideBarLinks";
+import { Sign } from "crypto";
+import LogoutButton from "./LogoutButton";
 
 type Props = {
   name: string;
@@ -72,6 +74,9 @@ export default function AvatarSheet({
                 text="Edit Profile"
                 icon={<LuEdit className="text-2xl text-purple-500" />}
               />
+              <div className="px-4 py-4">
+                <LogoutButton />
+              </div>
             </div>
           </SheetDescription>
         </SheetHeader>

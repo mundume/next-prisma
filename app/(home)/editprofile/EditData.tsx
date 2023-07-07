@@ -1,13 +1,15 @@
 import { prisma } from "@/lib/prisma";
+import { authOptions } from "@/utils/auth";
 import { User } from "@prisma/client";
 import { getServerSession } from "next-auth";
-import { useRouter } from "next/navigation";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
-export default function EditData({ user }: { user: User }) {
+export default async function EditData({ user }: { user: User }) {
   async function updateUserData(data: FormData) {
-    "use server";
     const session = await getServerSession(authOptions);
+    if (!session) {
+      redirect("/");
+    }
     const currentEmail = session?.user?.email!;
 
     await prisma.user.update({

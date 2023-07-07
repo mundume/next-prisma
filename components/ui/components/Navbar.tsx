@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
 import React from "react";
 import AvatarSheet from "./sidebar/AvatarSheet";
-import { authOptions } from "../../../app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { BiCameraHome } from "react-icons/bi";
+import { authOptions } from "@/utils/auth";
 
 async function Navbar({ href }: { href: string }) {
   const session = await getServerSession(authOptions);

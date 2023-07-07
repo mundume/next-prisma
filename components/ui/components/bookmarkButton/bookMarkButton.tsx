@@ -1,9 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import RetweetClient from "./bookmarkClient";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { Book } from "lucide-react";
 import BookmarkClient from "./bookmarkClient";
+import { authOptions } from "@/utils/auth";
 
 type Props = {
   postId: string;

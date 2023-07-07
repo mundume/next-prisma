@@ -1,10 +1,11 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import FollowButton from "@/components/ui/components/FollowButton/FollowButton";
 import UserCard from "@/components/ui/components/UserCard";
 import { prisma } from "@/lib/prisma";
+import { authOptions } from "@/utils/auth";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: {
@@ -19,6 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function page({ params }: Props) {
   const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect("/");
+  }
   const currentEmail = session?.user?.email;
 
   const userData = await prisma.user.findUnique({

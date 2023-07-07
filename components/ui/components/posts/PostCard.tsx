@@ -5,22 +5,8 @@ import { BiCommentDots } from "react-icons/bi";
 import LikeButton from "../likes/LikeButton";
 import RetweetButton from "../retweet/RetweetButton";
 import ProfileHoverCard from "../postCard/HoverCard";
+import { Post } from "@/lib/types";
 
-type Props = {
-  title: string;
-  content?: string;
-  id: string;
-  date: string;
-  name: string;
-  userId: string;
-  image: string;
-  commentNumber: number;
-  likesNumber: number;
-  followers: number;
-  following: number;
-  bio: string;
-  retweetsNumber: number;
-};
 export function PostCard({
   title,
   id,
@@ -34,7 +20,7 @@ export function PostCard({
   following,
   bio,
   retweetsNumber,
-}: Props) {
+}: Post) {
   return (
     <div className="text-gray-600">
       <div className="flex flex-col justify-around p-4 mx-2 my-3 min-h-[250px] border rounded ">

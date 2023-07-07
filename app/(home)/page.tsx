@@ -1,5 +1,4 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
@@ -8,6 +7,8 @@ import AddPosts from "../(postdirectory)/post/addpost";
 import { Posts } from "@/components/ui/components/posts/Posts";
 import Avatar from "@/components/ui/components/Avatar";
 import Navbar from "@/components/ui/components/Navbar";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/utils/auth";
 
 export const revalidate = 60;
 
@@ -20,15 +21,13 @@ export default async function Home() {
   });
 
   return (
-    <div className={clsx("border")}>
-      {session && (
-        // @ts-ignore server component cant ne rendered as jsx
-        <Navbar href="/" />
-      )}
+    <>
+      {session ? (
+        <div className={clsx("border")}>
+          {/*  @ts-ignore server component cant ne rendered as jsx */}
+          <Navbar href="/" />
 
-      <div className="p-2">
-        {session ? (
-          <>
+          <div className="p-2">
             <div className="flex flex-col items-center ">
               <div className="flex items-center gap-1">
                 <Avatar image={user?.image!} name={user?.name!} />
@@ -36,17 +35,15 @@ export default async function Home() {
                 <AddPosts />
               </div>
               <div className="flex items-center ">
-                {/* @ts-ignore server component cant ne rendered as jsx */}
+                {/* @ts-ignore server component */}
                 <Posts />
               </div>
             </div>
-          </>
-        ) : (
-          <div className={clsx("flex justify-between ")}>
-            <Link href="/api/auth/signin">Sign in</Link>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      ) : (
+        redirect("/signin")
+      )}
+    </>
   );
 }
