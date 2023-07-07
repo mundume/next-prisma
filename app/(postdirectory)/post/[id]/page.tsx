@@ -37,54 +37,66 @@ export default async function page({ params }: Props) {
     where: {
       id: params.id,
     },
-    include: {
+
+    select: {
       user: {
         include: {
           followedBy: true,
           following: true,
         },
       },
-      likes: {
-        include: {
+      authorId: true,
+      title: true,
+      createdAt: true,
+      id: true,
+      Comment: {
+        select: {
+          authorId: true,
+          content: true,
+          createdAt: true,
+          id: true,
+          post: true,
+          postId: true,
+
           user: {
-            include: {
-              followedBy: true,
-              following: true,
+            select: {
+              name: true,
+              id: true,
+              image: true,
             },
           },
-        },
-        orderBy: {
-          createdAt: "desc",
         },
       },
       retweets: {
-        include: {
+        select: {
           user: {
-            include: {
+            select: {
               followedBy: true,
+              name: true,
+              age: true,
+              bio: true,
+              id: true,
               following: true,
+              image: true,
             },
           },
         },
-        orderBy: {
-          createdAt: "desc",
-        },
       },
+      Bookmark: true,
 
-      Comment: {
-        include: {
-          user: true,
-        },
-        where: {
-          postId: params.id,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
-      Bookmark: {
-        include: {
-          user: true,
+      likes: {
+        select: {
+          user: {
+            select: {
+              followedBy: true,
+              name: true,
+              age: true,
+              bio: true,
+              id: true,
+              following: true,
+              image: true,
+            },
+          },
         },
       },
     },
@@ -116,9 +128,14 @@ export default async function page({ params }: Props) {
         },
       ],
     },
-    include: {
+    select: {
       followedBy: true,
       following: true,
+      likes: true,
+      bio: true,
+      name: true,
+      image: true,
+      id: true,
     },
   });
 
