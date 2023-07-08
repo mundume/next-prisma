@@ -48,11 +48,11 @@ export default function SignInPost({
           </p>
 
           <p className="flex items-center gap-1 text-gray-600">
-            <AiOutlineRetweet className="overflow-hidden text-2xl font-semibold text-yellow-400 transition duration-200 ease-in-out" />
+            <AiOutlineRetweet className="overflow-hidden text-2xl font-semibold transition duration-200 ease-in-out text-slate-200" />
             {retweetsNumber}
           </p>
           <p className="flex items-center gap-1">
-            <AiFillHeart className="overflow-hidden text-2xl text-purple-400 transition duration-200 ease-in-out" />
+            <AiFillHeart className="overflow-hidden text-2xl transition duration-200 ease-in-out text-slate-200" />
             {likesNumber}
           </p>
         </div>

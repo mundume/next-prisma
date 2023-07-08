@@ -22,14 +22,21 @@ type Props = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const session = await getServerSession(authOptions);
-  const user = await prisma.user.findUnique({
-    where: {
-      email: session?.user?.email!,
-    },
-  });
-  return {
-    title: ` ${user?.name} BooBer Posts`,
-  };
+  const currentEmail = session?.user?.email;
+
+  if (currentEmail) {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: currentEmail,
+      },
+    });
+    return {
+      title: ` ${user?.name} BooBer Posts`,
+    };
+  } else
+    return {
+      title: "BooBer Posts",
+    };
 }
 
 export default async function page({ params }: Props) {

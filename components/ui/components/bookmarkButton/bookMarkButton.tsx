@@ -9,6 +9,7 @@ type Props = {
 export default async function BookMarkButton({ postId }: Props) {
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email;
+  if (currentEmail === undefined || currentEmail === null) return;
   const currentUserId = await prisma.user
     .findUnique({
       where: {

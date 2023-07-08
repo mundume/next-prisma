@@ -78,12 +78,12 @@ export default function SignInMOdal({ providers, posts }: Props) {
                 <Dialog.Panel className="w-full max-w-4xl p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                   <Dialog.Title
                     as="h3"
-                    className="flex flex-col items-center justify-center py-4 text-xl font-semibold leading-6 text-gray-700 md:text-2xl "
+                    className="flex flex-col items-center justify-center pt-4 pb-2 text-xl font-semibold leading-6 text-gray-700 md:text-2xl "
                   >
                     Welcome to Boober Social
                   </Dialog.Title>
                   <p className="flex flex-col items-center gap-1 text-xl font-medium md:text-2xl ">
-                    Scroll down to see a few{" "}
+                    Scroll down to see a fe
                     <span className="text-purple-400">Posts</span>
                   </p>
                   <br />
