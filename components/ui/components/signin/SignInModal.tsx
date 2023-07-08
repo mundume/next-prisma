@@ -83,7 +83,7 @@ export default function SignInMOdal({ providers, posts }: Props) {
                     Welcome to Boober Social
                   </Dialog.Title>
                   <p className="flex flex-col items-center gap-1 text-xl font-medium md:text-2xl ">
-                    Scroll down to see a fe
+                    Scroll down to see a few
                     <span className="text-purple-400">Posts</span>
                   </p>
                   <br />
