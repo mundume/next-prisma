@@ -1,35 +1,39 @@
-import { prisma } from "@/lib/prisma";
-import { authOptions } from "@/utils/auth";
+"use client";
+
 import { User } from "@prisma/client";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { FC } from "react";
 
-export default async function EditData({ user }: { user: User }) {
-  async function updateUserData(data: FormData) {
-    const session = await getServerSession(authOptions);
-    if (!session) {
-      redirect("/");
-    }
-    const currentEmail = session?.user?.email!;
+export default function EditData({ user }: { user: User }) {
+  const router = useRouter();
+  async function updateUser(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
 
-    await prisma.user.update({
-      where: {
-        email: currentEmail,
-      },
-      data: {
-        name: data.get("name") as string,
-        bio: data.get("bio") as string,
-        age: Number(data.get("age")),
-        image: data.get("image") as string,
+    const body = {
+      name: formData.get("name") as string,
+      bio: formData.get("bio") as string,
+      age: formData.get("age") as string,
+      image: formData.get("image") as string,
+    };
+
+    const response = await fetch(`/api/editprofile`, {
+      method: "PUT",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
       },
     });
+
+    await response.json();
+    router.push(`/profile/${user.id}`);
   }
   return (
     <div className="flex flex-col m-2">
       <h1 className="text-xl font-semibold text-purple-500 ">
         Edit Your Profile
       </h1>
-      <form className="flex flex-col gap-1" action={updateUserData}>
+      <form className="flex flex-col gap-1" onSubmit={updateUser}>
         <label htmlFor="name">Name</label>
         <input
           type="text"

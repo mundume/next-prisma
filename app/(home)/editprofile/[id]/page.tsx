@@ -28,11 +28,22 @@ export default async function page({ params }: Props) {
     where: {
       id: params.id,
     },
+    select: {
+      name: true,
+      id: true,
+      email: true,
+      age: true,
+      bio: true,
+      image: true,
+    },
   });
-  return (
-    <div>
-      {/* @ts-ignore server component */}
-      <EditData user={userInfo!} />
-    </div>
-  );
+
+  if (userInfo) {
+    return (
+      <div>
+        {/* @ts-ignore server component */}
+        <EditData user={userInfo} />
+      </div>
+    );
+  }
 }

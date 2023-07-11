@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./auth";
 
 export async function updateUserData(data: FormData) {
+  "use server";
   const session = await getServerSession(authOptions);
   const currentEmail = session?.user?.email!;
 
