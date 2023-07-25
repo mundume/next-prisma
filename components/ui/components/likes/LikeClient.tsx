@@ -48,7 +48,7 @@ export default function LikeClient({
       console.log(" cant unlike");
     }
   };
-
+  //prevent double click
   const handleClick = async () => {
     if (!clicked) {
       setClicked(true);
