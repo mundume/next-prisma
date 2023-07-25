@@ -17,6 +17,7 @@ export default function LikeClient({
   LikedUserId: string;
 }) {
   const [liked, setLiked] = useState(isLiked);
+  const [clicked, setClicked] = useState(false);
 
   const router = useRouter();
   const like = async () => {
@@ -47,14 +48,24 @@ export default function LikeClient({
       console.log(" cant unlike");
     }
   };
+
+  const handleClick = async () => {
+    if (!clicked) {
+      setClicked(true);
+    }
+
+    if (isLiked) {
+      await unlike();
+    } else {
+      await like();
+    }
+  };
+  const iconClassName = liked
+    ? "text-2xl text-purple-400 transition duration-200 ease-in-out"
+    : "text-slate-200 text-2xl transition duration-200 ease-in-out";
   return (
-    <AiFillHeart
-      onClick={isLiked ? unlike : like}
-      className={
-        liked
-          ? "overflow-hidden text-2xl text-purple-400 transition duration-200 ease-in-out"
-          : "text-slate-200 text-2xl transition duration-200 ease-in-out"
-      }
-    />
+    <button disabled={clicked} onClick={handleClick} className={iconClassName}>
+      <AiFillHeart />
+    </button>
   );
 }
