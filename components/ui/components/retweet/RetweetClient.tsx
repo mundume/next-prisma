@@ -19,7 +19,9 @@ export default function RetweetClient({
 }: Props) {
   const [retweeted, setRetweeted] = useState(isRetweeted);
   const router = useRouter();
+
   const retweet = async () => {
+    if (isRetweeted) return;
     const res = await fetch("/api/retweet", {
       method: "POST",
       body: JSON.stringify({ userId, postId }),

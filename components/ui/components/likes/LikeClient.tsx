@@ -17,8 +17,10 @@ export default function LikeClient({
   LikedUserId: string;
 }) {
   const [liked, setLiked] = useState(isLiked);
+
   const router = useRouter();
   const like = async () => {
+    if (isLiked) return;
     const res = await fetch("/api/likes", {
       method: "POST",
       body: JSON.stringify({ userId, postId }),
