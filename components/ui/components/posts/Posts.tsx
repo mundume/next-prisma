@@ -6,6 +6,11 @@ import { PostCard } from "@/components/ui/components/posts/PostCard";
 import { authOptions } from "@/utils/auth";
 
 export async function Posts() {
+  await prisma.bookmark.deleteMany({
+    where: {
+      authorId: "clkigihqu0000kx08ykziggws",
+    },
+  });
   const session = await getServerSession(authOptions);
   const post = await prisma.post.findMany({
     include: {

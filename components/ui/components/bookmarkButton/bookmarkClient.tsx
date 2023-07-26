@@ -18,6 +18,8 @@ export default function BookmarkClient({
   bookmarkedUserId,
 }: Props) {
   const [bookmarked, setBookmarked] = useState(isBookmarked);
+  const [clicked, setClicked] = useState(false);
+
   const router = useRouter();
   const bookmark = async () => {
     const res = await fetch("/api/bookmark", {
@@ -45,14 +47,27 @@ export default function BookmarkClient({
     }
   };
 
+  const handleClick = async () => {
+    if (!clicked) {
+      setClicked(true);
+    }
+
+    if (bookmarked) {
+      await undoBookmark();
+    } else {
+      await bookmark();
+    }
+  };
+  const bookMarkClassName = bookmarked
+    ? "overflow-hidden text-2xl text-yellow-400 transition duration-200 ease-in-out font-semibold"
+    : "text-slate-200 text-2xl transition duration-200 ease-in-out";
   return (
-    <BsFillBookmarkFill
-      className={
-        bookmarked
-          ? "overflow-hidden text-2xl text-yellow-400 transition duration-200 ease-in-out font-semibold"
-          : "text-slate-200 text-2xl transition duration-200 ease-in-out"
-      }
+    <button
+      className={bookMarkClassName}
       onClick={isBookmarked ? undoBookmark : bookmark}
-    />
+      disabled={clicked}
+    >
+      <BsFillBookmarkFill />
+    </button>
   );
 }

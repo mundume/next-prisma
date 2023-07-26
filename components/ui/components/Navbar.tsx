@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { BiCameraHome } from "react-icons/bi";
 import { authOptions } from "@/utils/auth";
+import ThemeSwitcher from "./Theme";
 
 async function Navbar({ href }: { href: string }) {
   const session = await getServerSession(authOptions);
